@@ -14,7 +14,7 @@
   <meta name="designer" content="Wim von Benecke" />
   <meta name="reply-to" content="info@lesawi.co.za" />
   <meta name="owner" content="Wim von Benecke" />
-  <title>Dashboard</title>
+  <title>Travel Log Book</title>
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -36,17 +36,8 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           </ul>
-          <form class="d-flex">
-            <button class="btn btn-outline-danger mx-3" type="submit">
-              <a href="Logout.php" class="text-danger" aria-current="page">
-                <i class="fas fa-user-times"></i> Log Out
-              </a>
-            </button>
-            <button class="btn btn-outline-success" type="submit">
-              <a href="Login.php" class="text-success" aria-current="page">
-                <i class="fas fa-user"></i> Log In
-              </a>
-            </button>
+          <form class="d-flex" role="search">
+            <button class="btn btn-outline-danger" type="submit">Logon</button>
           </form>
         </div>
       </div>
@@ -58,43 +49,58 @@
   <!-- head start-->
   <div class="container">
     <div class="bg-dark text-white">
-      <h1>Dashboard</h1>
+      <h1>Travel log book</h1>
     </div>
   </div>
   <!-- head end -->
 
-  <!-- main area start -->
+  <!-- mian area start -->
   <div class="container">
     <div class="row">
-      <div class="col-lg-6">
-        <h1>Rep Name</h1>
+      <div class="col-lg-6 offset-3">
+        <div class="card bg-secondary">
+          <div class="card bg-secondary">
+            <div class="card-body">
+              <form action="TravelLogBookRepInput.php" method="post">
+                <div class="form-group">
+                  <label for="CustomerName">Customer Name:</label>
+                  <input type="text" name="FullName" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="VehicleDescription">Vehicle Description:</label>
+                  <input type="text" name="VehicleDescription" class="form-control"
+                    placeholder="e.g. Nissan NP200 ABC123MP">
+                </div>
+                <div class="form-group">
+                  <label for="StartingKm">Starting Odometer reading:</label>
+                  <input type="text" name="StartingKm" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="TravelLogComments">Comments:</label>
+                  <textarea class="form-control" name="TravelLogComments" id="" cols="30" rows="8"></textarea>
+                </div>
+                <div class="form-group mt-3">
+                  <div class="text-center">
+                    <button type="button" value="" name="BackToDashboard" class="btn btn-success btn-lg">
+                      <i class="fa fa-arrow-left" style="color: #0000ff; font-size: 23px;"></i>
+                      &nbsp; Back to Dash Board
+                    </button>
+                    <button type="Submit" value="Submit" name="Submit" class="btn btn-danger btn-lg">
+                      <i class="fa fa-arrow-up" style="color: #0000ff; font-size: 23px;"></i>
+                      &nbsp; Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-lg-6">
-        <h1>Rep Company</h1>
-      </div>
-      <div class="col-lg-4">
-        <!-- temp place holders to be replaced with nav bar at top and info below -->
-        <p>Add additional customer contact information</p><br>
-        <p>Appointment Input</p><br>
-        <p>Comments Input</p><br>
-        <p>Company Input</p><br>
-      </div>
-      <div class="col-lg-4">
-        <!-- temp place holders to be replaced with nav bar at top and info below -->
-        <p>Customer Input</p><br>
-        <p>Dashboard</p><br>
-        <p>Home Page</p><br>
-        <p>Log In Page</p><br>
-      </div>
-      <div class="col-lg-4">
-        <!-- temp place holders to be replaced with nav bar at top and info below -->
-        <p>Product Input</p><br>
-        <p>Rep Input</p><br>
-        <p>Trave Log Book</p><br>
-        <p>Vehicle Input</p><br>
-      </div>
+      <!-- button i -->
+      <!-- <i class="fa fa-arrow-up" style="color: #0000ff; font-size: 23px;"></i> -->
     </div>
   </div>
+  <br>
   <!-- main area end -->
 
   <!-- footer start -->

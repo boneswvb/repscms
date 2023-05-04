@@ -1,41 +1,3 @@
-<?php require_once("includes/DB.php"); ?>
-<?php require_once("includes/Functions.php"); ?>
-<?php require_once("includes/Sessions.php"); ?>
-<?php
-// making sure that a signed in user cannot return to the login page
-if (isset($_SESSION["UserId"])) {
-  Redirect_to("Dashboard.php");
-}
-
-//get the users details
-if (isset($_POST["Submit"])) {
-  $Email = $_POST["Email"];
-  $Password = $_POST["Password"];
-  if (empty($Email) || empty($Password)) {
-    $_SESSION["ErrorMessage"] = "All fields must be completed";
-    Redirect_to("Login.php");
-  } else {
-    // checking the users name and password
-    $Found_Account = Login_Attempt($Email, $Password);
-
-    // if logon is successfull - store the user data in sessions
-    if ($Found_Account) {
-      $_SESSION["UserId"] = $Found_Account["id"];
-      $_SESSION["Email"] = $Found_Account["email"];
-
-      // check if tracking var is set to redirect back to the same screen after sigin
-      if ($_SESSION["TrackingURL"]) {
-        Redirect_to($_SESSION["TrackingURL"]);
-      } else {
-        Redirect_to("Dashboard.php");
-      }
-    } else {
-      $_SESSION["ErrorMessage"] = "Incorrect User name and pasword combination";
-      Redirect_to("Login.php");
-    }
-  }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +14,7 @@ if (isset($_POST["Submit"])) {
   <meta name="designer" content="Wim von Benecke" />
   <meta name="reply-to" content="info@lesawi.co.za" />
   <meta name="owner" content="Wim von Benecke" />
-  <title>Login</title>
+  <title>Add A User</title>
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -86,7 +48,7 @@ if (isset($_POST["Submit"])) {
   <!-- head start-->
   <div class="container">
     <div class="bg-dark text-white">
-      <h1><i class="fa fa-key" style="color: #0000ff"></i> Login</h1>
+      <h1><i class="fa fa-user" style="color: #0000ff"></i> Add A New User</h1>
     </div>
   </div>
   <!-- head end -->
@@ -96,22 +58,18 @@ if (isset($_POST["Submit"])) {
   <section class="container py-2 mb-4">
     <div class="row">
       <div class="offset-sm-3 col-sm-6" style="min-height: 400px;">
-        <?php
-        echo ErrorMessage();
-        echo SuccessMessage();
-        ?>
         <div class="card ">
           <div class="card-header text-center">
-            <h4>Welcome Back</h4>
+            <h4>Add A User</h4>
           </div>
           <div class="card-body ">
-            <form action="Login.php" method="post">
+            <form action="AddAUser.php" method="post">
               <div class="form-group">
                 <label for="Email">Email Address:</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" style="height: 40px">
-                      <i class="fas fa-user" style="color: #0000ff;"></i>
+                      <i class="fa-solid fa-at" style="color: #0000ff;"></i>
                     </span>
                   </div>
                   <input type="email" class="form-control" name="Email" id="" required>
@@ -129,9 +87,9 @@ if (isset($_POST["Submit"])) {
                 </div>
               </div>
               <div class="d-grid">
-                <button type="submit" name="Submit" class="btn btn-success" value="Login">
+                <button type="submit" name="Submit" class="btn btn-success" value="">
                   <i class="fa fa-arrow-up" style="color: #0000ff; font-size: 23px;"></i>
-                  &nbsp; Login
+                  &nbsp; Add New User
                 </button>
               </div>
             </form>

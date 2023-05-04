@@ -26,3 +26,9 @@ function SuccessMessage()
   }
 }
 ?>
+
+<?php
+// Sessions set up in Login.php - For ease of Reference only 
+// $_SESSION["UserId"] = $Found_Account["id"];
+// $_SESSION["Email"] = $Found_Account["email"];
+?>

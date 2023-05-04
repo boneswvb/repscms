@@ -61,47 +61,32 @@
         <div class="card bg-secondary">
           <div class="card bg-secondary">
             <div class="card-body">
-              <form action="TravelLogBook.php" method="post">
-                <div class="form-group">
-                  <label for="FullName">Full Name:</label>
-                  <input type="text" name="Full Name" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label for="VehicleDescription">Vehicle Description:</label>
-                  <input type="text" name="VehicleDescription" class="form-control"
-                    placeholder="e.g. Nissan NP200 ABC123MP">
-                </div>
-                <div class="form-group">
-                  <label for="StartingKm">Starting Odometer reading:</label>
-                  <input type="text" name="StartingKm" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label for="CurrentMonth">Current Month:</label>
-                  <input type="text" name="CurrentMonth" class="form-control">
-                </div>
+              <form action="TravelLogBookRepInput.php" method="post">
                 <div class="form-group">
                   <label for="Date">Date:</label>
-                  <input type="Date" name="Date" class="form-control">
+                  <input type="date" name="Date" class="form-control">
                 </div>
                 <div class="form-group">
-                  <label for="EndOdometerReading">End Odometer Reading:</label>
-                  <input type="text" name="EndOdometerReading" class="form-control">
+                  <label for="CustomerName">Customer Name:</label>
+                  <select type="text" name="CustomerName" class="form-control">
+                    <option value=""></option>
+                    <option value="">Private/Other</option>
+                    <option value="">Fuel Fill Up</option>
+                    <option value="">Customer Name 1</option>
+                    <option value="">Customer Name 2</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label for="Bussiness">Bussiness Travel:</label>
-                  <input type="text" name="Bussiness" class="form-control">
+                  <label for="EndingKm">Ending Odometer reading:</label>
+                  <input type="text" name="EndingKm" class="form-control">
                 </div>
                 <div class="form-group">
-                  <label for="Private">Private Travel:</label>
-                  <input type="text" name="Private" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label for="TotalTravel">Total Travel:</label>
-                  <input type="text" name="TotalTravel" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label for="TravelLogComments">Comments:</label>
-                  <textarea class="form-control" name="TravelLogComments" id="" cols="30" rows="8"></textarea>
+                  <label for="Bussiness">Type of Travel:</label>
+                  <select type="text" name="Bussiness" class="form-control">
+                    <option value=""></option>
+                    <option value="">Bussiness</option>
+                    <option value="">Private</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="Fuel">Fuel:</label>
@@ -110,6 +95,10 @@
                 <div class="form-group">
                   <label for="Toll">Toll Gate Fees:</label>
                   <input type="text" name="Toll" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="TravelLogComments">Comments:</label>
+                  <textarea class="form-control" name="TravelLogComments" id="" cols="30" rows="8"></textarea>
                 </div>
                 <div class="form-group mt-3">
                   <div class="text-center">
