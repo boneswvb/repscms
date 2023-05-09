@@ -1,0 +1,107 @@
+// var_dump($Execute);
+
+// set date in copywrite
+<script>
+  document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>
+
+// date and time
+
+$CurrentTime = time();
+$DateTime = date("j F Y h:i:s");
+
+// get user globally from $_SESSION
+
+$User = $_SESSION["UserId"];
+$UserEmail = $_SESSION["Email"];
+
+// upload immage
+
+$Image = $_FILES["Image"]["name"];
+$Target = "adminImages/" . basename($_FILES["Image"]["name"]);
+
+<form action="MyProfile.php" method="post" enctype="multipart/form-data">
+  <div class="input-group my-2">
+    <input type="file" class="form-control" name="Image" id="imageSelect">
+    <label class="input-group-text" for="imageSelect">Select Image</label>
+  </div>
+<?form>
+
+// store the image in a specific forlder
+
+move_uploaded_file($_FILES["Image"]["tmp_name"], $Target);
+
+// delete images
+
+$ImageToBeDeleted = $DataRows['image']; as received and declared from the database
+
+$Taret_Path_to_DELETE_Image = "uploads/$ImageToBeDeleted";
+unlink($Taret_Path_to_DELETE_Image);
+
+// form sanitizing samples
+
+// HTML suggestion
+<div class="form-group">
+  <label for="TypeOfCompany">Type Of Company: <span class="text-white">*</span>
+    <span class="text-danger bg-white">
+      <?php echo $TypeOfCompanyError ?>
+    </span>
+  </label>
+  <input class="form-control" type="text" name="TypeOfCompany" required>
+</div>
+
+// top or bottom of the form
+<small class="text-white">* = Required</small>
+
+// PHP for form sanitizing
+if(isset($_POST["Submit"])) {
+  if(empty($_POST["Name"])) {
+    $NameError = "This field is required";
+  } else {
+    $Name = Test_User_Input($_POST["Name"]);
+    if (!preg_match("/^[A-za-z .]*$/", $Name)){
+      $NameError = "Only spaces and letter allowed";
+    } 
+  }
+
+  if(empty($_POST["Email"])) {
+    $EmailError = "This field is required";
+  } else {
+    $Email = Test_User_Input($_POST["Email"]);
+    if (!preg_match("/[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/", $Email)){
+      $EmailError = "Incorrect email format";
+    } 
+  }
+
+  if(empty($_POST["Gender"])) {
+    $GenderError = "This field is required";
+  } else {
+    $Gender = Test_User_Input($_POST["Gender"]);
+  }
+
+  if(empty($_POST["Website"])) {
+    $WebsiteError = "This field is required";
+  } else {
+    $Website = Test_User_Input($_POST["Website"]);
+    if (!preg_match("/(https:|http:|ftp:)\/\/+[a-zA-Z0-9.\-\/?\$\=\~]+\.[a-zA-Z0-9.\-\/?\$\=\~]*/", $Website)){
+      $WebsiteError = "Incorrect website adress format";
+    } 
+  }
+  // do not use data if not correct
+  if (
+    !empty($_POST["CompanyName"])
+    && !empty($_POST["ReportingManagerName"])
+  ) {
+    if (
+      preg_match("/^[A-za-z \.]*$/", $CompanyName)
+      && preg_match("/^[A-za-z \.]*$/", $ReportingManagerName)
+    ) {
+      // send the data to the database and handle errors for the db side received
+
+      echo " correct details received";
+
+    }
+  }
+}
+
+ 

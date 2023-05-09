@@ -86,7 +86,7 @@ if (isset($_POST["Submit"])) {
   <!-- head start-->
   <div class="container">
     <div class="bg-dark text-white">
-      <h1><i class="fa fa-key" style="color: #0000ff"></i> Login</h1>
+      <h1><i class="fa-solid fa-user" style="color: #0000ff;"></i> Login</h1>
     </div>
   </div>
   <!-- head end -->
@@ -111,7 +111,7 @@ if (isset($_POST["Submit"])) {
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" style="height: 40px">
-                      <i class="fas fa-user" style="color: #0000ff;"></i>
+                      <i class="fas fa-at" style="color: #0000ff;"></i>
                     </span>
                   </div>
                   <input type="email" class="form-control" name="Email" id="" required>

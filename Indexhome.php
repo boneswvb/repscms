@@ -36,7 +36,11 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item"></li>
           </ul>
-          <button class="btn btn-danger" type="submit">Logon</button>
+          <button class="btn btn-outline-success" type="submit">
+            <a href="Login.php" class="text-success" aria-current="page">
+              <i class="fas fa-user"></i> Log In
+            </a>
+          </button>
         </div>
       </div>
     </nav>

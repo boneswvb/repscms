@@ -1,3 +1,11 @@
+<?php require_once("includes/DB.php"); ?>
+<?php require_once("includes/Functions.php"); ?>
+<?php require_once("includes/Sessions.php"); ?>
+<?php require_once("includes/FormRepInput.php"); ?>
+<?php
+$_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
+// Confirm_Login()
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +13,7 @@
   <meta charset="utf-8" />
   <link rel="icon" href="images/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Fittness training, Nutrition" />
+  <meta name="description" content="Log book, customer information, diary" />
   <meta name="subject" content="Reps information of there customers" />
   <meta name="copyright" content="Lesawi Services CC" />
   <meta name="robots" content="index,follow" />
@@ -49,7 +57,7 @@
   <!-- head start-->
   <div class="container">
     <div class="bg-dark text-white">
-      <h1>Rep Input</h1>
+      <h1>Personal Details</h1>
     </div>
   </div>
   <!-- head end -->
@@ -58,17 +66,14 @@
   <div class="container">
     <div class="row">
       <!-- rep details start -->
-      <div>
-        <h1 class="align-self-end">
-          <img class="rounded float-center m-3" src="images/avatar.jpeg" alt="Photo of repName" width="90" height="90">
-          Rep name and last name
-        </h1>
-      </div>
       <article>
-        <h2>Personal Details</h2>
-        <form action="RepInput.php" method="post">
+        <form action="RepInput.php" method="post" enctype="multipart/form-data">
           <div class="col">
-            <div class="card bg-secondary">
+            <?php
+            echo ErrorMessage();
+            echo SuccessMessage();
+            ?>
+            <div class="card bg-secondary mt-4">
               <div class="card-body">
                 <div class="form-group">
                   <label for="FullName">Full Name:</label>
@@ -86,25 +91,33 @@
                   <label for="LandNumber">Landline Number:</label>
                   <input type="text" name="LandNumber" class="form-control">
                 </div>
+                <div class="text-left mt-2 mb-0">Add your profile picture:</div>
+                <div class="input-group my-2">
+                  <br>
+                  <input type="file" class="form-control" name="Image" id="imageSelect">
+                  <label class="input-group-text" for="imageSelect">Select Image</label>
+                </div>
               </div>
             </div>
           </div>
+          <!-- rep details end -->
+
+          <!-- buttons start -->
+          <div class="form-group mt-3">
+            <div class="text-center">
+              <button class="btn btn-outline-success" type="button" name="BackToDashboard">
+                <a href="Dashboard.php" class="text-success">
+                  <i class="fa fa-arrow-left"></i> Back to Dash Board
+                </a>
+              </button>
+              <button class="btn btn-outline-danger mx-3" type="submit" name="Submit">
+                <i class="fas fa-arrow-up"></i> Submit
+              </button>
+            </div>
+          </div>
+          <!-- buttons end -->
         </form>
       </article>
-      <!-- rep details end -->
-
-      <div class="form-group mt-3">
-        <div class="text-center">
-          <button type="button" value="" name="BackToDashboard" class="btn btn-success btn-lg">
-            <i class="fa fa-arrow-left" style="color: #0000ff; font-size: 23px;"></i>
-            &nbsp; Back to Dash Board
-          </button>
-          <button type="Submit" value="Submit" name="Submit" class="btn btn-danger btn-lg">
-            <i class="fa fa-arrow-up" style="color: #0000ff; font-size: 23px;"></i>
-            &nbsp; Submit
-          </button>
-        </div>
-      </div>
     </div>
   </div>
   <br>

@@ -1,3 +1,10 @@
+<?php require_once("includes/DB.php"); ?>
+<?php require_once("includes/Functions.php"); ?>
+<?php require_once("includes/Sessions.php"); ?>
+<?php
+$_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
+Confirm_Login()
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,16 +44,21 @@
 
           </ul>
           <form class="d-flex">
-            <button class="btn btn-outline-danger mx-3" type="submit">
-              <a href="Logout.php" class="text-danger" aria-current="page">
-                <i class="fas fa-user-times"></i> Log Out
-              </a>
-            </button>
-            <button class="btn btn-outline-success" type="submit">
-              <a href="Login.php" class="text-success" aria-current="page">
-                <i class="fas fa-user"></i> Log In
-              </a>
-            </button>
+            <?php
+            if (isset($_SESSION["UserId"])) {
+              ?>
+              <button class="btn btn-outline-danger mx-3" type="submit">
+                <a href="Logout.php" class="text-danger" aria-current="page">
+                  <i class="fas fa-user-times"></i> Log Out
+                </a>
+              </button>
+            <?php } else { ?>
+              <button class="btn btn-outline-success" type="submit">
+                <a href="Login.php" class="text-success" aria-current="page">
+                  <i class="fas fa-user"></i> Log In
+                </a>
+              </button>
+            <?php } ?>
           </form>
         </div>
       </div>

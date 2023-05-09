@@ -1,3 +1,13 @@
+<?php require_once("includes/DB.php"); ?>
+<?php require_once("includes/Functions.php"); ?>
+<?php require_once("includes/Sessions.php"); ?>
+<?php require_once("includes/FormCompanyInput.php"); ?>
+<?php
+$_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
+// Confirm_Login();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,8 +46,22 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           </ul>
-          <form class="d-flex" role="search">
-            <button class="btn btn-outline-danger" type="submit">Logon</button>
+          <form class="d-flex">
+            <?php
+            if (isset($_SESSION["UserId"])) {
+              ?>
+              <button class="btn btn-outline-danger mx-3" type="submit">
+                <a href="Logout.php" class="text-danger" aria-current="page">
+                  <i class="fas fa-user-times"></i> Log Out
+                </a>
+              </button>
+            <?php } else { ?>
+              <button class="btn btn-outline-success" type="submit">
+                <a href="Index.php" class="text-success" aria-current="page">
+                  <i class="fas fa-user"></i> Home
+                </a>
+              </button>
+            <?php } ?>
           </form>
         </div>
       </div>
@@ -61,51 +85,83 @@
       <article>
         <form action="CompanyInput.php" method="post">
           <div class="col">
+            <?php
+            echo ErrorMessage();
+            echo SuccessMessage();
+            ?>
             <div class="card bg-secondary">
               <div class="card-body">
+                <small class="text-white">The company details the rep is working for.</small>
                 <div class="form-group">
-                  <label for="CompanyName">Company Name:</label>
-                  <input class="form-control" type="text" name="CompanyName">
+                  <label for="CompanyName">Company Name: *
+                    <span class="text-danger bg-white">
+                      <?php echo $CompanyNameError ?>
+                    </span>
+                  </label>
+                  <input class="form-control" type="text" name="CompanyName" required>
                 </div>
                 <div class="form-group">
-                  <label for="ReportingManagerName">Reporting Manager Name:</label>
+                  <label for="ReportingManagerName">Reporting Manager Name:
+                    <span class="text-danger bg-white">
+                      <?php echo $ReportingManagerNameError ?>
+                    </span>
+                  </label>
                   <input class="form-control" type="text" name="ReportingManagerName">
                 </div>
                 <div class="form-group">
-                  <label for="ReportingManagerCell">Reporting Manager Cell:</label>
+                  <label for="ReportingManagerCell">Reporting Manager Cell:
+                    <span class="text-danger bg-white">
+                      <?php echo $ReportingManagerCellError ?>
+                    </span>
+                  </label>
                   <input class="form-control" type="text" name="ReportingManagerCell">
                 </div>
                 <div class="form-group">
-                  <label for="ReportingManagerLandlineNumber">Reporting Manager Landline Number:</label>
+                  <label for="ReportingManagerLandlineNumber">Reporting Manager Landline Number:
+                    <span class="text-danger bg-white">
+                      <?php echo $ReportingManagerLandlineNumberError ?>
+                    </span>
+                  </label>
                   <input class="form-control" type="text" name="ReportingManagerLandlineNumber">
                 </div>
                 <div class="form-group">
-                  <label for="CompanyAdress">Company Adress:</label>
+                  <label for="CompanyAdress">Company Adress:
+                    <span class="text-danger bg-white">
+                      <?php echo $CompanyAdressError ?>
+                    </span>
+                  </label>
                   <input class="form-control" type="text" name="CompanyAdress">
                 </div>
                 <div class="form-group">
-                  <label for="TypeOfCompany">Type Of Company:</label>
-                  <input class="form-control" type="text" name="TypeOfCompany">
+                  <label for="TypeOfCompany">Type Of Company: <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $TypeOfCompanyError ?>
+                    </span>
+                  </label>
+                  <input class="form-control" type="text" name="TypeOfCompany" required>
                 </div>
+                <small class="text-white">* = Required</small>
               </div>
             </div>
           </div>
+          <!-- rep company details end -->
+
+          <!-- buttons start -->
+          <div class="form-group mt-3">
+            <div class="text-center">
+              <button class="btn btn-outline-success" type="button" name="BackToDashboard">
+                <a href="Dashboard.php" class="text-success">
+                  <i class="fa fa-arrow-left"></i> Back to Dash Board
+                </a>
+              </button>
+              <button class="btn btn-outline-danger mx-3" type="submit" name="Submit">
+                <i class="fas fa-arrow-up"></i> Submit
+              </button>
+            </div>
+          </div>
+          <!-- buttons end -->
         </form>
       </article>
-      <!-- rep company details end -->
-
-      <div class="form-group mt-3">
-        <div class="text-center">
-          <button type="button" value="" name="BackToDashboard" class="btn btn-success btn-lg">
-            <i class="fa fa-arrow-left" style="color: #0000ff; font-size: 23px;"></i>
-            &nbsp; Back to Dash Board
-          </button>
-          <button type="Submit" value="Submit" name="Submit" class="btn btn-danger btn-lg">
-            <i class="fa fa-arrow-up" style="color: #0000ff; font-size: 23px;"></i>
-            &nbsp; Submit
-          </button>
-        </div>
-      </div>
     </div>
   </div>
   <br>
