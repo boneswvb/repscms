@@ -4,7 +4,7 @@
 <?php require_once("includes/FormVehicleInput.php"); ?>
 <?php
 $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
-// Confirm_Login();
+Confirm_Login();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,10 +121,9 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
                     </span>
                   </label>
                   <select class="form-control" name="FuelType" id="" required>
-                    <option value=""></option>
-                    <option value="">Petrol</option>
-                    <option value="">Diesel</option>
-                    <option value="">Other</option>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -143,12 +142,11 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
                       <?php echo $CompOwnError; ?>
                     </span>
                   </label>
-                  <select name="CompOwn" id="" class="form-control" required>
-                    <option value=""></option>
-                    <option value="">Own Vehicle</option>
-                    <option value="">Company Vehicle</option>
-                    <option value="">Rented Vehicle</option>
-                    <option value="">Other</option>
+                  <select class="form-control" name="CompOwn" id="" required>
+                    <option value="Own Vehicle">Own Vehicle</option>
+                    <option value="Company Vehicle">Company Vehicle</option>
+                    <option value="Rented Vehicle">Rented Vehicle</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
               </div>
@@ -169,7 +167,6 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
       </div>
     </div>
     <!-- buttons end -->
-
     </form>
     </article>
     <!-- rep vehicle details end -->

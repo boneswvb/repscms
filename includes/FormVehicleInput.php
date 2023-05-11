@@ -1,12 +1,4 @@
 <?php
-// Field name
-// Email
-// VehicleType
-// VehicleMake
-// FuelType
-// RegNumber
-// CompOwn
-
 // Vars for error handling
 $EmailError = "";
 $VehicleTypeError = "";
@@ -29,8 +21,8 @@ if (isset($_POST["Submit"])) {
     $VehicleTypeError = "This field is required";
   } else {
     $VehicleType = Test_User_Input($_POST["VehicleType"]);
-    if (!preg_match("/[A-za-z]/", $VehicleType)) {
-      $VehicleTypeError = "Incorrect email format";
+    if (!preg_match("/^[A-za-z ]*$/", $VehicleType)) {
+      $VehicleTypeError = "Only letter and spaces allowed";
     }
   }
 
@@ -38,8 +30,8 @@ if (isset($_POST["Submit"])) {
     $VehicleMakeError = "This field is required";
   } else {
     $VehicleMake = Test_User_Input($_POST["VehicleMake"]);
-    if (!preg_match("/[A-za-z]/", $VehicleMake)) {
-      $VehicleMakeError = "Incorrect email format";
+    if (!preg_match("/^[A-za-z ]*$/", $VehicleMake)) {
+      $VehicleMakeError = "Only letter and spaces allowed";
     }
   }
 
@@ -47,8 +39,8 @@ if (isset($_POST["Submit"])) {
     $FuelTypeError = "This field is required";
   } else {
     $FuelType = Test_User_Input($_POST["FuelType"]);
-    if (!preg_match("/[A-za-z]/", $FuelType)) {
-      $FuelTypeError = "Incorrect email format";
+    if (!preg_match("/^[A-za-z ]*$/", $FuelType)) {
+      $FuelTypeError = "Please select an option from the list";
     }
   }
 
@@ -56,8 +48,8 @@ if (isset($_POST["Submit"])) {
     $RegNumberError = "This field is required";
   } else {
     $RegNumber = Test_User_Input($_POST["RegNumber"]);
-    if (!preg_match("/[A-za-z]/", $RegNumber)) {
-      $RegNumberError = "Incorrect email format";
+    if (!preg_match("/^[A-za-z0-9 -]*$/", $RegNumber)) {
+      $RegNumberError = "Only letter, dashes, numbers and spaces allowed";
     }
   }
 
@@ -65,19 +57,27 @@ if (isset($_POST["Submit"])) {
     $CompOwnError = "This field is required";
   } else {
     $CompOwn = Test_User_Input($_POST["CompOwn"]);
-    if (!preg_match("/[A-za-z]/", $CompOwn)) {
-      $CompOwnError = "Incorrect email format";
+    if (!preg_match("/^[A-za-z ]*$/", $CompOwn)) {
+      $CompOwnError = "Please select an option from the list";
     }
   }
 
   // do not use data if not correct
   if (
-    !empty($_POST["CompanyName"])
-    && !empty($_POST["ReportingManagerName"])
+    !empty($_POST["Email"])
+    && !empty($_POST["VehicleType"])
+    && !empty($_POST["VehicleMake"])
+    && !empty($_POST["FuelType"])
+    && !empty($_POST["RegNumber"])
+    && !empty($_POST["CompOwn"])
   ) {
     if (
-      preg_match("/^[A-za-z \.]*$/", $CompanyName)
-      && preg_match("/^[A-za-z \.]*$/", $ReportingManagerName)
+      preg_match("/[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/", $Email)
+      && preg_match("/^[A-za-z ]*$/", $VehicleType)
+      && preg_match("/^[A-za-z ]*$/", $VehicleMake)
+      && preg_match("/^[A-za-z ]*$/", $FuelType)
+      && preg_match("/^[A-za-z0-9 -]*$/", $RegNumber)
+      && preg_match("/^[A-za-z ]*$/", $CompOwn)
     ) {
       // send the data to the database and handle errors for the db side received
 
