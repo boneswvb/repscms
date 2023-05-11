@@ -4,10 +4,8 @@
 <?php require_once("includes/FormCompanyInput.php"); ?>
 <?php
 $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
-// Confirm_Login();
+Confirm_Login();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,7 +91,8 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
               <div class="card-body">
                 <small class="text-white">The company details the rep is working for.</small>
                 <div class="form-group">
-                  <label for="CompanyName">Company Name: *
+                  <label for="CompanyName">Company Name:
+                    <span class="text-white">*</span>
                     <span class="text-danger bg-white">
                       <?php echo $CompanyNameError ?>
                     </span>

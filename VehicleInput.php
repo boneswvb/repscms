@@ -1,3 +1,11 @@
+<?php require_once("includes/DB.php"); ?>
+<?php require_once("includes/Functions.php"); ?>
+<?php require_once("includes/Sessions.php"); ?>
+<?php require_once("includes/FormVehicleInput.php"); ?>
+<?php
+$_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
+// Confirm_Login();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,8 +44,22 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           </ul>
-          <form class="d-flex" role="search">
-            <button class="btn btn-outline-danger" type="submit">Logon</button>
+          <form class="d-flex">
+            <?php
+            if (isset($_SESSION["UserId"])) {
+              ?>
+              <button class="btn btn-outline-danger mx-3" type="submit">
+                <a href="Logout.php" class="text-danger" aria-current="page">
+                  <i class="fas fa-user-times"></i> Log Out
+                </a>
+              </button>
+            <?php } else { ?>
+              <button class="btn btn-outline-success" type="submit">
+                <a href="Index.php" class="text-success" aria-current="page">
+                  <i class="fas fa-user"></i> Home
+                </a>
+              </button>
+            <?php } ?>
           </form>
         </div>
       </div>
@@ -59,59 +81,100 @@
     <div class="row">
       <!-- rep vehicle details start -->
       <article>
-        <div class="col">
-          <div class="card bg-secondary">
-            <div class="card-body">
-              <div class="form-group">
-                <label for="VehicleType">Vehicle Type:</label>
-                <input class="form-control" type="text" name="VehicleType" placeholder="e.g. Bakkie">
-              </div>
-              <div class="form-group">
-                <label for="VehicleMake">Vehicle Make:</label>
-                <input type="text" name="VehicleMake" class="form-control" placeholder="e.g Toyota">
-              </div>
-              <div class="form-group">
-                <label for="FeulType">Feul Type:</label>
-                <select class="form-control" name="FuelType" id="">
-                  <option value=""></option>
-                  <option value="">Petrol</option>
-                  <option value="">Diesel</option>
-                  <option value="">Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="RegNumber">Registration Number:</label>
-                <input type="text" name="RegNumber" class="form-control">
-              </div>
-              <div class="form-grouop">
-                <label for="ComOwn">Registered to:</label>
-                <select name="ComOwn" id="" class="form-control">
-                  <option value=""></option>
-                  <option value="">Own Vehicle</option>
-                  <option value="">Company Vehicle</option>
-                  <option value="">Rented Vehicle</option>
-                  <option value="">Other</option>
-                </select>
+        <form action="VehicleInput.php" method="post">
+          <div class="col">
+            <div class="card bg-secondary">
+              <div class="card-body">
+                <small class="text-white">* = Required</small>
+                <div class="form-group">
+                  <label for="Email">Rep's Email:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $EmailError; ?>
+                    </span>
+                  </label>
+                  <input type="text" name="Email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="VehicleType">Vehicle Type:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $VehicleTypeError; ?>
+                    </span>
+                  </label>
+                  <input class="form-control" type="text" name="VehicleType" placeholder="e.g. Bakkie" required>
+                </div>
+                <div class="form-group">
+                  <label for="VehicleMake">Vehicle Make:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $VehicleMakeError; ?>
+                    </span>
+                  </label>
+                  <input type="text" name="VehicleMake" class="form-control" placeholder="e.g Toyota" required>
+                </div>
+                <div class="form-group">
+                  <label for="FeulType">Feul Type:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $FuelTypeError; ?>
+                    </span>
+                  </label>
+                  <select class="form-control" name="FuelType" id="" required>
+                    <option value=""></option>
+                    <option value="">Petrol</option>
+                    <option value="">Diesel</option>
+                    <option value="">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="RegNumber">Registration Number:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $RegNumberError; ?>
+                    </span>
+                  </label>
+                  <input type="text" name="RegNumber" class="form-control" required>
+                </div>
+                <div class="form-grouop">
+                  <label for="CompOwn">Registered to:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $CompOwnError; ?>
+                    </span>
+                  </label>
+                  <select name="CompOwn" id="" class="form-control" required>
+                    <option value=""></option>
+                    <option value="">Own Vehicle</option>
+                    <option value="">Company Vehicle</option>
+                    <option value="">Rented Vehicle</option>
+                    <option value="">Other</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </article>
-      <!-- rep vehicle details end -->
-
-      <div class="form-group mt-3">
-        <div class="text-center">
-          <button type="button" value="" name="BackToDashboard" class="btn btn-success btn-lg">
-            <i class="fa fa-arrow-left" style="color: #0000ff; font-size: 23px;"></i>
-            &nbsp; Back to Dash Board
-          </button>
-          <button type="Submit" value="Submit" name="Submit" class="btn btn-danger btn-lg">
-            <i class="fa fa-arrow-up" style="color: #0000ff; font-size: 23px;"></i>
-            &nbsp; Submit
-          </button>
-        </div>
+    </div>
+    <!-- buttons start -->
+    <div class="form-group mt-3">
+      <div class="text-center">
+        <button class="btn btn-outline-success" type="button" name="BackToDashboard">
+          <a href="Dashboard.php" class="text-success">
+            <i class="fa fa-arrow-left"></i> Back to Dash Board
+          </a>
+        </button>
+        <button class="btn btn-outline-danger mx-3" type="submit" name="Submit">
+          <i class="fas fa-arrow-up"></i> Submit
+        </button>
       </div>
     </div>
+    <!-- buttons end -->
+
+    </form>
+    </article>
+    <!-- rep vehicle details end -->
+
+  </div>
   </div>
   <br>
   <!-- main area end -->

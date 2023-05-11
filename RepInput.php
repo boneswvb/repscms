@@ -4,7 +4,7 @@
 <?php require_once("includes/FormRepInput.php"); ?>
 <?php
 $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
-// Confirm_Login()
+Confirm_Login();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,21 +75,49 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
             ?>
             <div class="card bg-secondary mt-4">
               <div class="card-body">
+                <small class="text-white">* = required</small>
                 <div class="form-group">
-                  <label for="FullName">Full Name:</label>
-                  <input type="text" name="FullName" class="form-control">
+                  <label for="FullName">Full Name:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $FullNameError; ?>
+                    </span>
+                  </label>
+                  <input type="text" name="FullName" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="Adress">Adress:</label>
+                  <label for="Adress">Adress:
+                    <span class="text-danger bg-white">
+                      <?php echo $AdressError; ?>
+                    </span>
+                  </label>
                   <input type="text" name="Adress" class="form-control">
                 </div>
                 <div class="form-group">
-                  <label for="CellNumber">Cell Number:</label>
-                  <input type="text" name="CellNumber" class="form-control">
+                  <label for="CellNumber">Cell Number:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $CellNumberError; ?>
+                    </span>
+                  </label>
+                  <input type="text" name="CellNumber" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="LandNumber">Landline Number:</label>
+                  <label for="LandNumber">Landline Number:
+                    <span class="text-danger bg-white">
+                      <?php echo $LandNumberError; ?>
+                    </span>
+                  </label>
                   <input type="text" name="LandNumber" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="Email">Email:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $EmailError; ?>
+                    </span>
+                  </label>
+                  <input type="text" name="Email" class="form-control" required>
                 </div>
                 <div class="text-left mt-2 mb-0">Add your profile picture:</div>
                 <div class="input-group my-2">
