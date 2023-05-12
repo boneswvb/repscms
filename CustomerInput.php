@@ -78,73 +78,122 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
   <!-- main area start -->
   <div class="container">
     <div class="row">
-      <!-- left area start -->
       <div class="col-sm-12">
         <div class="card bg-secondary text-white mb-3">
           <div class="card-body">
             <form action="CustomerInput.php" method="post">
               <div class="form-group">
-                <label for="Date">Capture Date: * </label>
-                <input class="form-control" type="date" name="Date" min="2023-01-01" id="date" value="" required>
+                <label for="Date">Capture Date:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $DateError; ?>
+                  </span>
+                </label>
+                <small>If not selected - Default equals today's date.</small>
+                <input class="form-control" type="date" name="Date" min="2023-01-01" id="date">
               </div>
               <div class="form-group">
-                <label for="Contact1">Contact Name: * </label>
-                <input class="form-control" type="text" name="Name" required>
+                <label for="Contact1">Contact Name:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $NameError; ?>
+                  </span>
+                </label>
+                <input class="form-control" type="text" name="Name">
               </div>
               <div>
                 <div class="form-group">
-                  <label for="Contact1">Contact Number 1: * </label>
-                  <input class="form-control" type="text" name="Contact1" required>
+                  <label for="Contact1">Contact Number 1:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $Contact1Error; ?>
+                    </span>
+                  </label>
+                  <input class="form-control" type="text" name="Contact1">
                 </div>
                 <div class="form-group">
-                  <label for="Contact2">Contact Number 2: </label>
+                  <label for="Contact2">Contact Number 2:
+                    <span class="text-danger bg-white">
+                      <?php echo $Contact2Error; ?>
+                    </span>
+                  </label>
                   <input class="form-control" type="text" name="Contact2">
                 </div>
               </div>
               <div class="form-group">
-                <label for="Email">Email: * </label>
-                <input class="form-control" type="email" name="Email" required>
+                <label for="Email">Email:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $EmailError; ?>
+                  </span>
+                </label>
+                <input class="form-control" type="email" name="Email">
               </div>
               <div class="form-group">
-                <label for="CompanyName">Company Name: * </label>
-                <input class="form-control" type="text" name="CompanyName" required>
+                <label for="CompanyName">Company Name:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $CompanyNameError; ?>
+                  </span>
+                </label>
+                <input class="form-control" type="text" name="CompanyName">
               </div>
               <div class="form-group">
-                <label for="CompanyAdress">Company Adress: * </label>
-                <input class="form-control" type="text" name="CompanyAdress" required>
+                <label for="CompanyAdress">Company Adress:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $CompanyAdressError; ?>
+                  </span>
+                </label>
+                <input class="form-control" type="text" name="CompanyAdress">
               </div>
               <div class="form-group">
-                <label for="TypeOfCompany">Type Of Company: </label>
-                <select class="form-control" name="TypeOfCompany" required>
-                  <option value="">--- Select an option ---</option>
-                  <option value="">Transport</option>
-                  <option value="">Restaurant</option>
-                  <option value="">FMCG Retail</option>
+                <label for="TypeOfCompany">Type Of Company:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $TypeOfCompanyError; ?>
+                  </span>
+                </label>
+                <select class="form-control" name="TypeOfCompany">
+                  <option value="Unknown">---Select an option---</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Restaurant">Restaurant</option>
+                  <option value="FMCG Retail">FMCG Retail</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="CompanyTelephone">Company Switchboard Number: </label>
+                <label for="CompanyTelephone">Company Switchboard Number:
+                  <span class="text-danger bg-white">
+                    <?php echo $CompanyTelephoneError; ?>
+                  </span>
+                </label>
                 <input class="form-control" type="text" name="CompanyTelephone">
               </div>
               <div class="form-group">
-                <label for="CompanyAccountNumber">Company Account Number: * </label>
-                <input class="form-control" type="text" name="CompanyAccountNumber" required>
-              </div>
-              <div class="form-group">
-                <label for="Appointment" required>Appointment type: * </label>
+                <label for="Appointment">Appointment type:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $AppointmentError; ?>
+                  </span>
+                </label>
                 <br>
-                <select class="form-control" name="Appointment" required>
-                  <option value="">--- Select an option ---</option>
-                  <option value="">Existing Customer</option>
-                  <option value="">Confirmed Appointment</option>
-                  <option value="">Assessment</option>
-                  <option value="">Possible New Customer</option>
-                  <option value="">Quote</option>
+                <select class="form-control" name="Appointment">
+                  <option value="Unknown">--- Select an option ---</option>
+                  <option value="Existing Customer">Existing Customer</option>
+                  <option value="Confirmed Appointment">Confirmed Appointment</option>
+                  <option value="Assessment">Assessment</option>
+                  <option value="Possible New Customer">Possible New Customer</option>
+                  <option value="Quote">Quote</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="Comment">Comments: </label>
-                <textarea Class="form-control mb-3" Name="Comment" rows="5" cols="25"></textarea>
+                <label for="Comment">Comments:
+                  <span class="text-danger bg-white">
+                    <?php echo $CommentError; ?>
+                  </span>
+                </label>
+                <textarea Class="form-control mb-3" Name="Comment" rows="5" cols="25"
+                  placeholder="The following text will be added to your comment irrespective if you added a comment or not - Added by: [Your Name] on [Date] at [Time]"></textarea>
               </div>
           </div>
         </div>
@@ -164,10 +213,8 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
         <!-- buttons end -->
         </form>
       </div>
-      <!-- main end -->
     </div>
   </div>
-
   <!-- main area end -->
 
   <!-- footer start -->

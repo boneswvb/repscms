@@ -1,5 +1,15 @@
 // var_dump($Execute);
 
+// current page imports
+<?php require_once("includes/DB.php"); ?>
+<?php require_once("includes/Functions.php"); ?>
+<?php require_once("includes/Sessions.php"); ?>
+<?php require_once("includes/FormVehicleInput.php"); ?>
+<?php
+$_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
+// Confirm_Login();
+?>
+
 // set date in copywrite
 <script>
   document.getElementById("year").innerHTML = new Date().getFullYear();
@@ -55,6 +65,16 @@ unlink($Taret_Path_to_DELETE_Image);
 <small class="text-white">* = Required</small>
 
 // PHP for form sanitizing
+// Date -  /^[0-9]{2}[ \-\.]{1}[a-zA-z0-9]{2,3}[ \-\.]{1}[0-9]{2,4}$/gm
+// Name - /^[A-za-z .]*$/
+// Email - /[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/
+// Website - /(https:|http:|ftp:)\/\/+[a-zA-Z0-9.\-\/?\$\=\~]+\.[a-zA-Z0-9.\-\/?\$\=\~]*/
+// Tel/Cell number - /^[\+]{0,1}[0-9 \-]{10,15}$/
+// CompanyName - /^[A-za-z0-9 .\/]*$/
+// Address - /^[A-za-z0-9 .]*$/
+// Account Number - /^[A-za-z0-9 .\/\-\_]*$/
+// Comments - ^[A-za-z0-9 .\,\-\_]*$
+
 if(isset($_POST["Submit"])) {
   if(empty($_POST["Name"])) {
     $NameError = "This field is required";
@@ -65,29 +85,6 @@ if(isset($_POST["Submit"])) {
     } 
   }
 
-  if(empty($_POST["Email"])) {
-    $EmailError = "This field is required";
-  } else {
-    $Email = Test_User_Input($_POST["Email"]);
-    if (!preg_match("/[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/", $Email)){
-      $EmailError = "Incorrect email format";
-    } 
-  }
-
-  if(empty($_POST["Gender"])) {
-    $GenderError = "This field is required";
-  } else {
-    $Gender = Test_User_Input($_POST["Gender"]);
-  }
-
-  if(empty($_POST["Website"])) {
-    $WebsiteError = "This field is required";
-  } else {
-    $Website = Test_User_Input($_POST["Website"]);
-    if (!preg_match("/(https:|http:|ftp:)\/\/+[a-zA-Z0-9.\-\/?\$\=\~]+\.[a-zA-Z0-9.\-\/?\$\=\~]*/", $Website)){
-      $WebsiteError = "Incorrect website adress format";
-    } 
-  }
   // do not use data if not correct
   if (
     !empty($_POST["CompanyName"])
