@@ -73,7 +73,7 @@ unlink($Taret_Path_to_DELETE_Image);
 // CompanyName - /^[A-za-z0-9 .\/]*$/
 // Address - /^[A-za-z0-9 .]*$/
 // Account Number - /^[A-za-z0-9 .\/\-\_]*$/
-// Comments - ^[A-za-z0-9 .\,\-\_]*$
+// Comments - /^[A-za-z0-9 .\,\-\_]*$/
 
 if(isset($_POST["Submit"])) {
   if(empty($_POST["Name"])) {

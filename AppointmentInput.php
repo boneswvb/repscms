@@ -1,3 +1,11 @@
+<?php require_once("includes/DB.php"); ?>
+<?php require_once("includes/Functions.php"); ?>
+<?php require_once("includes/Sessions.php"); ?>
+<?php require_once("includes/FormAppointmentInput.php"); ?>
+<?php
+$_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
+// Confirm_Login();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +44,23 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item"></li>
           </ul>
-          <button class="btn btn-danger" type="submit">Logon</button>
+          <form class="d-flex">
+            <?php
+            if (isset($_SESSION["UserId"])) {
+              ?>
+              <button class="btn btn-outline-danger mx-3" type="submit">
+                <a href="Logout.php" class="text-danger" aria-current="page">
+                  <i class="fas fa-user-times"></i> Log Out
+                </a>
+              </button>
+            <?php } else { ?>
+              <button class="btn btn-outline-success" type="submit">
+                <a href="Index.php" class="text-success" aria-current="page">
+                  <i class="fas fa-user"></i> Home
+                </a>
+              </button>
+            <?php } ?>
+          </form>
         </div>
       </div>
     </nav>
@@ -54,7 +78,6 @@
   <!-- main area start -->
   <div class="container">
     <div class="row">
-      <!-- left area start -->
       <div class="col-sm-12">
         <div class="card bg-secondary mb-5">
           <div class="card-body">
@@ -67,38 +90,42 @@
                 <label for="Appointment" required>Appointment type: * </label>
                 <br>
                 <select class="form-control" name="Appointment" required>
-                  <option value="">--- Select an option ---</option>
-                  <option value="">No Appointment</option>
-                  <option value="">Confirmed Appointment</option>
-                  <option value="">Confirmed Assessment</option>
-                  <option value="">Confirmed Quote</option>
-                  <option value="">Possible New Customer</option>
-                  <option value="">Possible Assessment</option>
-                  <option value="">Possible Quote</option>
-                  <option value="">Courtesy Call</option>
-                  <option value="">Staff Visit</option>
+                  <option value="Unknown">--- Select an option ---</option>
+                  <option value="No Appointment">No Appointment</option>
+                  <option value="Confirmed Appointment">Confirmed Appointment</option>
+                  <option value="Confirmed Assessment">Confirmed Assessment</option>
+                  <option value="Confirmed Quote">Confirmed Quote</option>
+                  <option value="Possible New Customer">Possible New Customer</option>
+                  <option value="Possible Assessment">Possible Assessment</option>
+                  <option value="Possible Quote">Possible Quote</option>
+                  <option value="Courtesy Call">Courtesy Call</option>
+                  <option value="Staff Visit">Staff Visit</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="Comment">Comments: </label>
                 <textarea Class="form-control mb-3" Name="Comment" rows="5" cols="25" placeholder="Optional"></textarea>
               </div>
-              <div class="form-group">
-                <div class="text-center">
-                  <button type="Submit" value="Submit" name="Submit" class="btn btn-success btn-lg">
-                    <i class="fa fa-arrow-up" style="color: #0000ff; font-size: 23px;"></i>
-                    &nbsp; Submit
-                  </button>
-                </div>
-              </div>
-            </form>
           </div>
         </div>
+        <!-- buttons start -->
+        <div class="form-group mb-3">
+          <div class="text-center">
+            <button class="btn btn-outline-success" type="button" name="BackToDashboard">
+              <a href="Dashboard.php" class="text-success">
+                <i class="fa fa-arrow-left"></i> Back to Dash Board
+              </a>
+            </button>
+            <button class="btn btn-outline-danger mx-3" type="submit" name="Submit">
+              <i class="fas fa-arrow-up"></i> Submit
+            </button>
+          </div>
+        </div>
+        <!-- buttons end -->
+        </form>
       </div>
-      <!-- main end -->
     </div>
   </div>
-
   <!-- main area end -->
 
   <!-- footer start -->
