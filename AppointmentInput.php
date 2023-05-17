@@ -4,7 +4,7 @@
 <?php require_once("includes/FormAppointmentInput.php"); ?>
 <?php
 $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
-// Confirm_Login();
+Confirm_Login();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,18 +81,29 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
       <div class="col-sm-12">
         <div class="card bg-secondary mb-5">
           <div class="card-body">
-            <form action="CustomerInput.php" method="post">
+            <form action="AppointmentInput.php" method="post">
               <div class="form-group">
-                <label for="AppointmentDate">Appointment Date: * </label>
-                <input class="form-control" type="date" name="AppointmentDate" required>
+                <label for="AppointmentDate">Appointment Date:
+                  <span class="text-white">*
+                    <small class="text-white">(Default equals today's date)</small></span>
+                  <span class="text-danger bg-white">
+                    <?php echo $AppointmentDateError; ?>
+                  </span>
+                </label>
+                <input class="form-control" type="date" name="AppointmentDate">
               </div>
               <div class="form-group">
-                <label for="Appointment" required>Appointment type: * </label>
+                <label for="Appointment">Appointment type:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $AppointmentError; ?>
+                  </span>
+                </label>
                 <br>
-                <select class="form-control" name="Appointment" required>
+                <select class="form-control" name="Appointment">
                   <option value="Unknown">--- Select an option ---</option>
-                  <option value="No Appointment">No Appointment</option>
                   <option value="Confirmed Appointment">Confirmed Appointment</option>
+                  <option value="No Appointment">No Appointment</option>
                   <option value="Confirmed Assessment">Confirmed Assessment</option>
                   <option value="Confirmed Quote">Confirmed Quote</option>
                   <option value="Possible New Customer">Possible New Customer</option>
@@ -103,8 +114,13 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
                 </select>
               </div>
               <div class="form-group">
-                <label for="Comment">Comments: </label>
-                <textarea Class="form-control mb-3" Name="Comment" rows="5" cols="25" placeholder="Optional"></textarea>
+                <label for="Comment">Comments:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $CommentError; ?>
+                  </span>
+                </label>
+                <textarea Class="form-control mb-3" name="Comment" rows="5" cols="25"></textarea>
               </div>
           </div>
         </div>

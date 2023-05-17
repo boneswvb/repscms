@@ -1,3 +1,11 @@
+<?php require_once("includes/DB.php"); ?>
+<?php require_once("includes/Functions.php"); ?>
+<?php require_once("includes/Sessions.php"); ?>
+<?php require_once("includes/FormAddAUser.php"); ?>
+<?php
+$_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
+// Confirm_Login();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,8 +43,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           </ul>
-          <form class="d-flex" role="search">
-            <h4><a href="Index.php">Home</a></h4>
+          <form class="d-flex">
+            <?php
+            if (isset($_SESSION["UserId"])) {
+              ?>
+              <button class="btn btn-outline-danger mx-3" type="submit">
+                <a href="Logout.php" class="text-danger" aria-current="page">
+                  <i class="fas fa-user-times"></i> Log Out
+                </a>
+              </button>
+            <?php } else { ?>
+              <button class="btn btn-outline-success" type="submit">
+                <a href="Index.php" class="text-success" aria-current="page">
+                  <i class="fas fa-user"></i> Home
+                </a>
+              </button>
+            <?php } ?>
           </form>
         </div>
       </div>
@@ -58,12 +80,23 @@
   <section class="container py-2 mb-4">
     <div class="row">
       <div class="offset-sm-3 col-sm-6" style="min-height: 400px;">
-        <div class="card ">
+        <div class="card">
           <div class="card-header text-center">
             <h4>Add A User</h4>
           </div>
-          <div class="card-body ">
+          <div class="card-body bg-secondary mb-2">
             <form action="AddAUser.php" method="post">
+              <div class="form-group">
+                <label for="Name">Full Name:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" style="height: 40px">
+                      <i class="fa-solid fa-user" style="color: #0000ff;"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" name="Name" id="">
+                </div>
+              </div>
               <div class="form-group">
                 <label for="Email">Email Address:</label>
                 <div class="input-group mb-3">
@@ -72,7 +105,7 @@
                       <i class="fa-solid fa-at" style="color: #0000ff;"></i>
                     </span>
                   </div>
-                  <input type="email" class="form-control" name="Email" id="" required>
+                  <input type="email" class="form-control" name="Email" id="">
                 </div>
               </div>
               <div class="form-group">
@@ -83,23 +116,28 @@
                       <i class="fas fa-lock" style="color: #0000ff;"></i>
                     </span>
                   </div>
-                  <input type="password" class="form-control" name="Password" id="" required>
+                  <input type="password" class="form-control" name="Password" id="">
                 </div>
               </div>
-              <div class="d-grid">
-                <button type="submit" name="Submit" class="btn btn-success" value="">
-                  <i class="fa fa-arrow-up" style="color: #0000ff; font-size: 23px;"></i>
-                  &nbsp; Add New User
-                </button>
-              </div>
-            </form>
           </div>
+          <!-- buttons start -->
+          <div class="form-group mb-2">
+            <div class="text-center">
+              <button class="btn btn-outline-success" type="button" name="BackToDashboard">
+                <a href="Dashboard.php" class="text-success">
+                  <i class="fa fa-arrow-left"></i> Back to Dash Board
+                </a>
+              </button>
+              <button class="btn btn-outline-danger mx-3" type="submit" name="Submit">
+                <i class="fas fa-arrow-up"></i> Submit
+              </button>
+            </div>
+          </div>
+          <!-- buttons end -->
+          </form>
+
         </div>
-        <br>
-        <br>
-        <br>
       </div>
-    </div>
   </section>
   <br>
   <!-- main area end -->

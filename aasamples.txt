@@ -65,7 +65,7 @@ unlink($Taret_Path_to_DELETE_Image);
 <small class="text-white">* = Required</small>
 
 // PHP for form sanitizing
-// Date -  /^[0-9]{2}[ \-\.]{1}[a-zA-z0-9]{2,3}[ \-\.]{1}[0-9]{2,4}$/gm
+// Date -  /^[0-9]{2}[ \-\.]{1}[a-zA-z0-9]{2,3}[ \-\.]{1}[0-9]{2,4}$/
 // Name - /^[A-za-z .]*$/
 // Email - /[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/
 // Website - /(https:|http:|ftp:)\/\/+[a-zA-Z0-9.\-\/?\$\=\~]+\.[a-zA-Z0-9.\-\/?\$\=\~]*/
