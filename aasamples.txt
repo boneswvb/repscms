@@ -74,6 +74,7 @@ unlink($Taret_Path_to_DELETE_Image);
 // Address - /^[A-za-z0-9 .]*$/
 // Account Number - /^[A-za-z0-9 .\/\-\_]*$/
 // Comments - /^[A-za-z0-9 .\,\-\_]*$/
+// Password - /^(?=.*\d.*\d)(?=.*[A-Z]{1,}[a-z]{1,}[0-9]{1,}[\!\@\#\$\%\*\?]{1,}).{8,}/
 
 if(isset($_POST["Submit"])) {
   if(empty($_POST["Name"])) {

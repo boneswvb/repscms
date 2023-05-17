@@ -87,7 +87,12 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
           <div class="card-body bg-secondary mb-2">
             <form action="AddAUser.php" method="post">
               <div class="form-group">
-                <label for="Name">Full Name:</label>
+                <label for="Name">Full Name:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $NameError; ?>
+                  </span>
+                </label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" style="height: 40px">
@@ -98,7 +103,12 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
                 </div>
               </div>
               <div class="form-group">
-                <label for="Email">Email Address:</label>
+                <label for="Email">Email Address:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $EmailError; ?>
+                  </span>
+                </label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" style="height: 40px">
@@ -109,7 +119,12 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
                 </div>
               </div>
               <div class="form-group">
-                <label for="password">Password:</label>
+                <label for="password">Password:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $PasswordError; ?>
+                  </span>
+                </label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" style="height: 40px">
