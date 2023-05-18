@@ -78,7 +78,7 @@ unlink($Taret_Path_to_DELETE_Image);
 // Website - /(https:|http:|ftp:)\/\/+[a-zA-Z0-9.\-\/?\$\=\~]+\.[a-zA-Z0-9.\-\/?\$\=\~]*/
 // Tel/Cell number - /^[\+]{0,1}[0-9 \-]{10,15}$/
 // CompanyName - /^[A-za-z0-9 .\/]*$/
-// Address - /^[A-za-z0-9 .]*$/
+// Address - /^[A-za-z0-9 \.\-\_\/\,]{1,150}$/
 // Account Number - /^[A-za-z0-9 .\/\-\_]*$/
 // Comments - /^[A-za-z0-9 .\,\-\_]*$/
 // Password - /^(?=.*\d.*\d)(?=.*[A-Z]{1,}[a-z]{1,}[0-9]{1,}[\!\@\#\$\%\*\?]{1,}).{8,}/

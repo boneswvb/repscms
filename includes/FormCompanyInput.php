@@ -1,9 +1,7 @@
 <?php
 // Var to check for input errors
 $CompanyNameError = "";
-$ReportingManagerNameError = "";
-$ReportingManagerCellError = "";
-$ReportingManagerLandlineNumberError = "";
+$CompanyContactNumberError = "";
 $CompanyAdressError = "";
 $TypeOfCompanyError = "";
 
@@ -18,24 +16,10 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  if (!empty($_POST["ReportingManagerName"])) {
-    $ReportingManagerName = Test_User_Input($_POST["ReportingManagerName"]);
-    if (!preg_match("/^[A-za-z \.]*$/", $ReportingManagerName)) {
-      $ReportingManagerNameError = "Only letters and white spaces allowed";
-    }
-  }
-
-  if (!empty($_POST["ReportingManagerCell"])) {
-    $ReportingManagerCell = Test_User_Input($_POST["ReportingManagerCell"]);
-    if (!preg_match("/^[\+]{0,1}[0-9 \-]{10,15}$/", $ReportingManagerCell)) {
-      $ReportingManagerCellError = "Only 10 numbers allowed";
-    }
-  }
-
-  if (!empty($_POST["ReportingManagerLandlineNumber"])) {
-    $ReportingManagerLandlineNumber = Test_User_Input($_POST["ReportingManagerLandlineNumber"]);
-    if (!preg_match("/^[\+]{0,1}[0-9 \-]{10,15}$/", $ReportingManagerLandlineNumber)) {
-      $ReportingManagerLandlineNumberError = "Only 10 or 11 numbers allowed";
+  if (!empty($_POST["CompanyContactNumber"])) {
+    $CompanyContactNumberName = Test_User_Input($_POST["CompanyContactNumber"]);
+    if (!preg_match("/^[A-za-z \.]*$/", $CompanyContactNumber)) {
+      $CompanyContactNumberError = "Only letters and white spaces allowed";
     }
   }
 
@@ -43,7 +27,7 @@ if (isset($_POST["Submit"])) {
     $CompanyAdressError = "This field is required";
   } else {
     $CompanyAdress = Test_User_Input($_POST["CompanyAdress"]);
-    if (!preg_match("/^[A-za-z0-9 .]{1,150}$/", $CompanyAdress)) {
+    if (!preg_match("/^[A-za-z0-9 \.\-\_\/\,]{1,150}$/", $CompanyAdress)) {
       $CompanyAdressError = "Only spaces and letter allowed";
     }
   }
@@ -57,23 +41,20 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  // do not use data if not correct
+  // Add data to the db
   if (
     !empty($_POST["CompanyName"])
-    && !empty($_POST["ReportingManagerName"])
-    && !empty($_POST["ReportingManagerCell"])
-    && !empty($_POST["ReportingManagerLandlineNumber"])
     && !empty($_POST["CompanyAdress"])
     && !empty($_POST["TypeOfCompany"])
+    && !empty($_POST["CompanyContactNumber"])
   ) {
     if (
       preg_match("/^[A-za-z \.]*$/", $CompanyName)
-      && preg_match("/^[A-za-z \.]*$/", $ReportingManagerName)
-      && preg_match("/^[0-9]{10,10}$/", $ReportingManagerCell)
-      && preg_match("/^[0-9]{10,11}$/", $ReportingManagerLandlineNumber)
-      && preg_match("/^[A-za-z \.\,0-9]{20,150}$/", $CompanyAdress)
+      && preg_match("/^[A-za-z0-9 \.\-\_\/\,]{1,150}$/", $CompanyAdress)
       && preg_match("/[A-za-z \.\,]/", $TypeOfCompany)
+      && preg_match("/^[A-za-z \.]*$/", $CompanyContactNumber)
     ) {
+
       // send the data to the database and handle errors
 
       // Form field names

@@ -100,28 +100,12 @@ Confirm_Login();
                   <input class="form-control" type="text" name="CompanyName" required>
                 </div>
                 <div class="form-group">
-                  <label for="ReportingManagerName">Reporting Manager Name:
+                  <label for="ReportingManagerCell">Company Contact Number:
                     <span class="text-danger bg-white">
-                      <?php echo $ReportingManagerNameError ?>
+                      <?php echo $CompanyContactNumberError ?>
                     </span>
                   </label>
-                  <input class="form-control" type="text" name="ReportingManagerName">
-                </div>
-                <div class="form-group">
-                  <label for="ReportingManagerCell">Reporting Manager Cell:
-                    <span class="text-danger bg-white">
-                      <?php echo $ReportingManagerCellError ?>
-                    </span>
-                  </label>
-                  <input class="form-control" type="text" name="ReportingManagerCell">
-                </div>
-                <div class="form-group">
-                  <label for="ReportingManagerLandlineNumber">Reporting Manager Landline Number:
-                    <span class="text-danger bg-white">
-                      <?php echo $ReportingManagerLandlineNumberError ?>
-                    </span>
-                  </label>
-                  <input class="form-control" type="text" name="ReportingManagerLandlineNumber">
+                  <input class="form-control" type="tel" name="CompanyContactNumber">
                 </div>
                 <div class="form-group">
                   <label for="CompanyAdress">Company Adress:
