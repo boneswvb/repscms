@@ -22,8 +22,15 @@ $DateTime = date("j F Y h:i:s");
 
 // get user globally from $_SESSION
 
-$User = $_SESSION["UserId"];
-$UserEmail = $_SESSION["Email"];
+$_SESSION["UserId"];
+$_SESSION["Email"];
+$_SESSION["UName"];
+
+// message calls for html display
+<?php
+  echo ErrorMessage();
+  echo SuccessMessage();
+?>
 
 // upload immage
 
@@ -109,3 +116,36 @@ if(isset($_POST["Submit"])) {
   return $Data;
 }
 ;
+
+// add data to the db
+$ConnectingDB; 
+$sql = "INSERT INTO post(dateTime,title,category,author,image,post)";
+$sql .= "VALUES(:dateTime, :postTitle)";
+$stmt = $ConnectingDB->prepare($sql);
+$stmt->bindValue(':dateTime', $DateTime);
+$stmt->bindValue(':postTitle', $PostTitle);
+$Execute = $stmt->execute();
+
+//Saving the uploaded file to a folder specified
+move_uploaded_file($_FILES["Image"]["tmp_name"], $Target);
+
+if ($Execute) {
+  $_SESSION["SuccessMessage"] = "Blog with ID : " . $ConnectingDB->lastInsertId() . " added";
+  Redirect_to("AddNewPost.php");
+} else {
+  $_SESSION["ErrorMessage"] = "Something went wrong. Please try again.";
+  Redirect_to("AddNewPost.php");
+}
+
+// get * from table
+
+global $ConnectingDB;
+$sql = "SELECT * FROM comments";
+$Execute = $ConnectingDB->query($sql);
+while ($DataRows = $Execute->fetch()) {
+  $CommentId = $DataRows["id"];
+  $CommentDateTime = $DataRows["datetime"];
+  $CommenterName = $DataRows["name"];
+  $CommentContent = $DataRows["comment"];
+  $CommentPostId = $DataRows["post_id"];
+}

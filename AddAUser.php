@@ -4,7 +4,7 @@
 <?php require_once("includes/FormAddAUser.php"); ?>
 <?php
 $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
-// Confirm_Login();
+Confirm_Login();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,6 +80,10 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
   <section class="container py-2 mb-4">
     <div class="row">
       <div class="offset-sm-3 col-sm-6" style="min-height: 400px;">
+        <?php
+        echo ErrorMessage();
+        echo SuccessMessage();
+        ?>
         <div class="card">
           <div class="card-header text-center">
             <h4>Add A User</h4>

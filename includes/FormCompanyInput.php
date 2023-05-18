@@ -27,31 +27,36 @@ if (isset($_POST["Submit"])) {
 
   if (!empty($_POST["ReportingManagerCell"])) {
     $ReportingManagerCell = Test_User_Input($_POST["ReportingManagerCell"]);
-    if (!preg_match("/^[0-9]{10,10}$/", $ReportingManagerCell)) {
+    if (!preg_match("/^[\+]{0,1}[0-9 \-]{10,15}$/", $ReportingManagerCell)) {
       $ReportingManagerCellError = "Only 10 numbers allowed";
     }
   }
 
   if (!empty($_POST["ReportingManagerLandlineNumber"])) {
     $ReportingManagerLandlineNumber = Test_User_Input($_POST["ReportingManagerLandlineNumber"]);
-    if (!preg_match("/^[0-9]{10,11}$/", $ReportingManagerLandlineNumber)) {
+    if (!preg_match("/^[\+]{0,1}[0-9 \-]{10,15}$/", $ReportingManagerLandlineNumber)) {
       $ReportingManagerLandlineNumberError = "Only 10 or 11 numbers allowed";
     }
   }
 
-  if (!empty($_POST["CompanyAdress"])) {
+  if (empty($_POST["CompanyAdress"])) {
+    $CompanyAdressError = "This field is required";
+  } else {
     $CompanyAdress = Test_User_Input($_POST["CompanyAdress"]);
-    if (!preg_match("/^[A-za-z \.\,0-9]{20,150}$/", $CompanyAdress)) {
-      $CompanyAdressError = "Min 20 and Max 150 Characters. No special characters";
+    if (!preg_match("/^[A-za-z0-9 .]{1,150}$/", $CompanyAdress)) {
+      $CompanyAdressError = "Only spaces and letter allowed";
     }
   }
 
-  if (!empty($_POST["TypeOfCompany"])) {
+  if (empty($_POST["TypeOfCompany"])) {
+    $TypeOfCompanyError = "This field is required";
+  } else {
     $TypeOfCompany = Test_User_Input($_POST["TypeOfCompany"]);
     if (!preg_match("/[A-za-z \.\,]/", $TypeOfCompany)) {
-      $TypeOfCompanyError = "Only letters and white spaces allowed";
+      $TypeOfCompanyError = "Only spaces and letter allowed";
     }
   }
+
   // do not use data if not correct
   if (
     !empty($_POST["CompanyName"])

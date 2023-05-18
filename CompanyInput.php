@@ -125,6 +125,7 @@ Confirm_Login();
                 </div>
                 <div class="form-group">
                   <label for="CompanyAdress">Company Adress:
+                    <span class="text-white">*</span>
                     <span class="text-danger bg-white">
                       <?php echo $CompanyAdressError ?>
                     </span>
@@ -132,7 +133,8 @@ Confirm_Login();
                   <input class="form-control" type="text" name="CompanyAdress">
                 </div>
                 <div class="form-group">
-                  <label for="TypeOfCompany">Type Of Company: <span class="text-white">*</span>
+                  <label for="TypeOfCompany">Type Of Company:
+                    <span class="text-white">*</span>
                     <span class="text-danger bg-white">
                       <?php echo $TypeOfCompanyError ?>
                     </span>

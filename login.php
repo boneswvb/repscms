@@ -22,6 +22,7 @@ if (isset($_POST["Submit"])) {
     if ($Found_Account) {
       $_SESSION["UserId"] = $Found_Account["id"];
       $_SESSION["Email"] = $Found_Account["email"];
+      $_SESSION["UName"] = $Found_Account["name"];
 
       // check if tracking var is set to redirect back to the same screen after sigin
       if ($_SESSION["TrackingURL"]) {
