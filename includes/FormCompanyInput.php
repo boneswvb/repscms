@@ -1,6 +1,7 @@
 <?php
 // Var to check for input errors
 $CompanyNameError = "";
+$CompanyContactNameError = "";
 $CompanyContactNumberError = "";
 $CompanyAdressError = "";
 $TypeOfCompanyError = "";
@@ -15,6 +16,15 @@ if (isset($_POST["Submit"])) {
     $CompanyName = Test_User_Input($_POST["CompanyName"]);
     if (!preg_match("/^[A-za-z \.]*$/", $CompanyName)) {
       $CompanyNameError = "Only letters and white spaces allowed";
+    }
+  }
+
+  if (empty($_POST["CompanyContactName"])) {
+    $CompanyContactNameError = "This field is required";
+  } else {
+    $CompanyContactName = Test_User_Input($_POST["CompanyContactName"]);
+    if (!preg_match("/^[A-za-z .]*$/", $CompanyContactName)) {
+      $CompanyContactNameError = "Only letters and white spaces allowed";
     }
   }
 
@@ -48,23 +58,26 @@ if (isset($_POST["Submit"])) {
   // Add data to the db
   if (
     !empty($_POST["CompanyName"])
+    && !empty($_POST["CompanyContactName"])
     && !empty($_POST["CompanyContactNumber"])
     && !empty($_POST["CompanyAdress"])
     && !empty($_POST["TypeOfCompany"])
   ) {
     if (
       preg_match("/^[A-za-z \.]*$/", $CompanyName)
+      && preg_match("/^[A-za-z .]*$/", $CompanyContactName)
       && preg_match("/^[\+]{0,1}[0-9 \-]{10,15}$/", $CompanyContactNumber)
       && preg_match("/^[A-za-z0-9 \.\-\_\/\,]{1,150}$/", $CompanyAdress)
       && preg_match("/[A-za-z \.\,]/", $TypeOfCompany)
     ) {
       // add data to the db
       $ConnectingDB;
-      $sql = "INSERT INTO comp_info(datetime,companyname,companycontactnumber,companyadress,typeofcompany,addby)";
-      $sql .= "VALUES(:datetimE, :companynamE, :companycontactnumbeR, :companyadresS, :typeofcompanY, :addbY)";
+      $sql = "INSERT INTO comp_info(datetime,companyname,companycontactname,companycontactnumber,companyadress,typeofcompany,addby)";
+      $sql .= "VALUES(:datetimE, :companynamE, :companycontactnamE, :companycontactnumbeR, :companyadresS, :typeofcompanY, :addbY)";
       $stmt = $ConnectingDB->prepare($sql);
       $stmt->bindValue(':datetimE', $DateTime);
       $stmt->bindValue(':companynamE', $CompanyName);
+      $stmt->bindValue(':companycontactnamE', $CompanyContactName);
       $stmt->bindValue(':companycontactnumbeR', $CompanyContactNumber);
       $stmt->bindValue(':companyadresS', $CompanyAdress);
       $stmt->bindValue(':typeofcompanY', $TypeOfCompany);

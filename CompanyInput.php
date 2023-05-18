@@ -100,6 +100,15 @@ Confirm_Login();
                   <input class="form-control" type="text" name="CompanyName">
                 </div>
                 <div class="form-group">
+                  <label for="CompanyContactName">Company Contact Name:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $CompanyContactNameError ?>
+                    </span>
+                  </label>
+                  <input class="form-control" type="text" name="CompanyContactName">
+                </div>
+                <div class="form-group">
                   <label for="ReportingManagerCell">Company Contact Number:
                     <span class="text-white">*</span>
                     <span class="text-danger bg-white">
