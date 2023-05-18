@@ -97,10 +97,11 @@ Confirm_Login();
                       <?php echo $CompanyNameError ?>
                     </span>
                   </label>
-                  <input class="form-control" type="text" name="CompanyName" required>
+                  <input class="form-control" type="text" name="CompanyName">
                 </div>
                 <div class="form-group">
                   <label for="ReportingManagerCell">Company Contact Number:
+                    <span class="text-white">*</span>
                     <span class="text-danger bg-white">
                       <?php echo $CompanyContactNumberError ?>
                     </span>
@@ -123,7 +124,7 @@ Confirm_Login();
                       <?php echo $TypeOfCompanyError ?>
                     </span>
                   </label>
-                  <input class="form-control" type="text" name="TypeOfCompany" required>
+                  <input class="form-control" type="text" name="TypeOfCompany">
                 </div>
                 <small class="text-white">* = Required</small>
               </div>
