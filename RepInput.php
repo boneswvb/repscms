@@ -44,8 +44,22 @@ Confirm_Login();
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           </ul>
-          <form class="d-flex" role="search">
-            <button class="btn btn-outline-danger" type="submit">Logon</button>
+          <form class="d-flex">
+            <?php
+            if (isset($_SESSION["UserId"])) {
+              ?>
+              <button class="btn btn-outline-danger mx-3" type="submit">
+                <a href="Logout.php" class="text-danger" aria-current="page">
+                  <i class="fas fa-user-times"></i> Log Out
+                </a>
+              </button>
+            <?php } else { ?>
+              <button class="btn btn-outline-success" type="submit">
+                <a href="Index.php" class="text-success" aria-current="page">
+                  <i class="fas fa-user"></i> Home
+                </a>
+              </button>
+            <?php } ?>
           </form>
         </div>
       </div>
@@ -57,7 +71,7 @@ Confirm_Login();
   <!-- head start-->
   <div class="container">
     <div class="bg-dark text-white">
-      <h1>Personal Details</h1>
+      <h1><i class="fa fa-list" style="color: #0000ff"></i> Personal Details</h1>
     </div>
   </div>
   <!-- head end -->
@@ -77,21 +91,10 @@ Confirm_Login();
               <div class="card-body">
                 <small class="text-white">* = required</small>
                 <div class="form-group">
-                  <label for="FullName">Full Name:
-                    <span class="text-white">*</span>
-                    <span class="text-danger bg-white">
-                      <?php echo $FullNameError; ?>
-                    </span>
-                  </label>
-                  <input type="text" name="FullName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label for="Adress">Adress:
-                    <span class="text-danger bg-white">
-                      <?php echo $AdressError; ?>
-                    </span>
-                  </label>
-                  <input type="text" name="Adress" class="form-control">
+                  <label for="FullName">Full Name:</label>
+                  <span class="bg-white">
+                    <?php echo htmlentities($_SESSION["UName"]); ?>
+                  </span>
                 </div>
                 <div class="form-group">
                   <label for="CellNumber">Cell Number:
@@ -100,26 +103,15 @@ Confirm_Login();
                       <?php echo $CellNumberError; ?>
                     </span>
                   </label>
-                  <input type="text" name="CellNumber" class="form-control" required>
+                  <input type="text" name="CellNumber" class="form-control">
                 </div>
-                <div class="form-group">
-                  <label for="LandNumber">Landline Number:
-                    <span class="text-danger bg-white">
-                      <?php echo $LandNumberError; ?>
-                    </span>
-                  </label>
-                  <input type="text" name="LandNumber" class="form-control">
+                <div class="form-group my-2">
+                  <label for="Email">Email:</label>
+                  <span class="bg-white">
+                    <?php echo htmlentities($_SESSION["Email"]); ?>
+                  </span>
                 </div>
-                <div class="form-group">
-                  <label for="Email">Email:
-                    <span class="text-white">*</span>
-                    <span class="text-danger bg-white">
-                      <?php echo $EmailError; ?>
-                    </span>
-                  </label>
-                  <input type="text" name="Email" class="form-control" required>
-                </div>
-                <div class="text-left mt-2 mb-0">Add your profile picture:</div>
+                <div class="text-left mb-0">Add your profile picture:</div>
                 <div class="input-group my-2">
                   <br>
                   <input type="file" class="form-control" name="Image" id="imageSelect">

@@ -1,11 +1,10 @@
 <?php
 // vars for errors fields
 $FullNameError = "";
-$AdressError = "";
 $CellNumberError = "";
-$LandNumberError = "";
-$EmailError = "";
 $ImageError = "";
+$DateTime = date("j F Y h:i:s");
+$AddedBy = $_SESSION["UName"];
 
 if (isset($_POST["Submit"])) {
   // uploading of image to uploads file
@@ -22,13 +21,6 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  if (!empty($_POST["Adress"])) {
-    $Adress = Test_User_Input($_POST["Adress"]);
-    if (!preg_match("/^[A-za-z \.\,0-9]{20,150}$/", $Adress)) {
-      $AdressError = "Min 20 and Max 150 Characters. No special characters";
-    }
-  }
-
   if (empty($_POST["CellNumber"])) {
     $CellNumberError = "This field is required";
   } else {
@@ -38,25 +30,10 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  if (!empty($_POST["LandNumber"])) {
-    $LandNumber = Test_User_Input($_POST["LandNumber"]);
-    if (!preg_match("/^[0-9]{10,11}$/", $LandNumber)) {
-      $LandNumberError = "Only 10 numbers allowed";
-    }
-  }
-
-  if (empty($_POST["Email"])) {
-    $EmailError = "This field is required";
-  } else {
-    $Email = Test_User_Input($_POST["Email"]);
-    if (!preg_match("/[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/", $Email)) {
-      $EmailError = "Incorrect email format";
-    }
-  }
-
   if (!empty($_POST["Image"])) {
     $Image = Test_User_Input($_POST["Image"]);
   }
+  echo $Image;
 
   // do not use data if not correct
   if (
