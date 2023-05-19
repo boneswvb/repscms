@@ -82,17 +82,17 @@ Confirm_Login();
       <!-- rep details start -->
       <article>
         <form action="RepInput.php" method="post" enctype="multipart/form-data">
+          <?php
+          echo ErrorMessage();
+          echo SuccessMessage();
+          ?>
           <div class="col">
-            <?php
-            echo ErrorMessage();
-            echo SuccessMessage();
-            ?>
             <div class="card bg-secondary mt-4">
               <div class="card-body">
                 <small class="text-white">* = required</small>
                 <div class="form-group">
                   <label for="FullName">Full Name:</label>
-                  <span class="bg-white">
+                  <span class="text-white">
                     <?php echo htmlentities($_SESSION["UName"]); ?>
                   </span>
                 </div>
@@ -107,9 +107,19 @@ Confirm_Login();
                 </div>
                 <div class="form-group my-2">
                   <label for="Email">Email:</label>
-                  <span class="bg-white">
+                  <span class="text-white">
                     <?php echo htmlentities($_SESSION["Email"]); ?>
                   </span>
+                </div>
+                <div class="form-group">
+                  <label for="Bio">Your Bio:
+                    <span class="text-white">*</span>
+                    <span class="text-danger bg-white">
+                      <?php echo $BioError; ?>
+                    </span>
+                  </label>
+                  <small>(Sell yourself here. Max 10 000 characters.)</small>
+                  <textarea class="form-control" name="Bio" id="" cols="30" rows="6"></textarea>
                 </div>
                 <div class="text-left mb-0">Add your profile picture:</div>
                 <div class="input-group my-2">

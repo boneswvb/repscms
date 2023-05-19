@@ -1,5 +1,6 @@
 // var_dump($Execute);
 
+------------------------------
 // current page imports
 <?php require_once("includes/DB.php"); ?>
 <?php require_once("includes/Functions.php"); ?>
@@ -10,28 +11,33 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
 // Confirm_Login();
 ?>
 
+--------------------------------------
 // set date in copywrite
 <script>
   document.getElementById("year").innerHTML = new Date().getFullYear();
 </script>
 
+----------------------------------
 // date and time
 
 $CurrentTime = time();
 $DateTime = date("j F Y h:i:s");
 
+----------------------------
 // get user globally from $_SESSION
 
 $_SESSION["UserId"];
 $_SESSION["Email"];
 $_SESSION["UName"];
 
+-----------------------------
 // message calls for html display
 <?php
   echo ErrorMessage();
   echo SuccessMessage();
 ?>
 
+-------------------------------------
 // upload immage
 
 $Image = $_FILES["Image"]["name"];
@@ -55,6 +61,7 @@ $ImageToBeDeleted = $DataRows['image']; as received and declared from the databa
 $Taret_Path_to_DELETE_Image = "uploads/$ImageToBeDeleted";
 unlink($Taret_Path_to_DELETE_Image);
 
+---------------------------
 // form sanitizing samples
 
 // HTML suggestion
@@ -117,6 +124,7 @@ if(isset($_POST["Submit"])) {
 }
 ;
 
+-------------------
 // add data to the db
 $ConnectingDB; 
 $sql = "INSERT INTO post(dateTime,title,category,author,image,post)";
@@ -137,6 +145,7 @@ if ($Execute) {
   Redirect_to("AddNewPost.php");
 }
 
+---------------------------
 // get * from table
 
 global $ConnectingDB;
@@ -149,3 +158,22 @@ while ($DataRows = $Execute->fetch()) {
   $CommentContent = $DataRows["comment"];
   $CommentPostId = $DataRows["post_id"];
 }
+
+-----------------------
+<?php
+// get data from db to check if data exist in db
+$EmailCheck = "";
+$ConnectingDB;
+$sql = "SELECT email FROM rep_info LIMIT 1";
+$Execute = $ConnectingDB->query($sql);
+while ($DataRows = $Execute->fetch()) {
+  $EmailCheck = $DataRows["email"];
+}
+?>
+
+if ($EmailCheck == $Email) {
+    // check if a bio exist
+    $_SESSION["ErrorMessage"] = "You have already added your bio. You can just update it from the dashboard.";
+    Redirect_to("RepInput.php");
+  }
+-----------------------
