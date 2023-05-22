@@ -35,8 +35,8 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  if (empty($_POST["FuelType"])) {
-    $FuelTypeError = "This field is required";
+  if ($_POST["FuelType"] == "Unknown") {
+    $FuelTypeError = "Select an option";
   } else {
     $FuelType = Test_User_Input($_POST["FuelType"]);
     if (!preg_match("/^[A-za-z ]*$/", $FuelType)) {
@@ -53,8 +53,8 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  if (empty($_POST["CompOwn"])) {
-    $CompOwnError = "This field is required";
+  if ($_POST["CompOwn"] == "Unknown") {
+    $CompOwnError = "select an option";
   } else {
     $CompOwn = Test_User_Input($_POST["CompOwn"]);
     if (!preg_match("/^[A-za-z ]*$/", $CompOwn)) {
@@ -80,7 +80,7 @@ if (isset($_POST["Submit"])) {
       && preg_match("/^[A-za-z ]*$/", $CompOwn)
     ) {
       // send the data to the database and handle errors for the db side received
-
+      //RegNumber check if in db
       echo " correct details received";
 
     }

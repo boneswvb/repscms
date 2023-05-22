@@ -93,7 +93,7 @@ Confirm_Login();
                       <?php echo $EmailError; ?>
                     </span>
                   </label>
-                  <input type="text" name="Email" class="form-control" required>
+                  <input type="text" name="Email" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="VehicleType">Vehicle Type:
@@ -102,7 +102,7 @@ Confirm_Login();
                       <?php echo $VehicleTypeError; ?>
                     </span>
                   </label>
-                  <input class="form-control" type="text" name="VehicleType" placeholder="e.g. Bakkie" required>
+                  <input class="form-control" type="text" name="VehicleType" placeholder="e.g. Bakkie">
                 </div>
                 <div class="form-group">
                   <label for="VehicleMake">Vehicle Make:
@@ -111,7 +111,7 @@ Confirm_Login();
                       <?php echo $VehicleMakeError; ?>
                     </span>
                   </label>
-                  <input type="text" name="VehicleMake" class="form-control" placeholder="e.g Toyota" required>
+                  <input type="text" name="VehicleMake" class="form-control" placeholder="e.g Toyota">
                 </div>
                 <div class="form-group">
                   <label for="FeulType">Feul Type:
@@ -120,7 +120,8 @@ Confirm_Login();
                       <?php echo $FuelTypeError; ?>
                     </span>
                   </label>
-                  <select class="form-control" name="FuelType" id="" required>
+                  <select class="form-control" name="FuelType" id="">
+                    <option value="Unknown">---Select an option---</option>
                     <option value="Petrol">Petrol</option>
                     <option value="Diesel">Diesel</option>
                     <option value="Other">Other</option>
@@ -133,7 +134,7 @@ Confirm_Login();
                       <?php echo $RegNumberError; ?>
                     </span>
                   </label>
-                  <input type="text" name="RegNumber" class="form-control" required>
+                  <input type="text" name="RegNumber" class="form-control">
                 </div>
                 <div class="form-grouop">
                   <label for="CompOwn">Registered to:
@@ -142,7 +143,8 @@ Confirm_Login();
                       <?php echo $CompOwnError; ?>
                     </span>
                   </label>
-                  <select class="form-control" name="CompOwn" id="" required>
+                  <select class="form-control" name="CompOwn" id="">
+                    <option value="Unknown">---Select an option---</option>
                     <option value="Own Vehicle">Own Vehicle</option>
                     <option value="Company Vehicle">Company Vehicle</option>
                     <option value="Rented Vehicle">Rented Vehicle</option>
