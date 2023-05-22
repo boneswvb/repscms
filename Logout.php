@@ -3,11 +3,10 @@
 
 <?php
 // destroy all sessions
+$_SESSION["TrackingURL"] = null;
 $_SESSION["UserId"] = null;
 $_SESSION["Email"] = null;
-
-//added by Wim - to delete
-$_SESSION["TrackingURL"] = null;
+$_SESSION["UName"] = null;
 
 session_destroy();
 

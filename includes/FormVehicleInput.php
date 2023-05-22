@@ -1,6 +1,9 @@
 <?php
 // Vars for error handling
-$EmailError = "";
+$AddedBy = $_SESSION["UserId"];
+$Email = $_SESSION["Email"];
+$UserName = $_SESSION["UName"];
+$DateTime = date("j F Y h:i:s");
 $VehicleTypeError = "";
 $VehicleMakeError = "";
 $FuelTypeError = "";
@@ -8,15 +11,6 @@ $RegNumberError = "";
 $CompOwnError = "";
 
 if (isset($_POST["Submit"])) {
-  if (empty($_POST["Email"])) {
-    $EmailError = "This field is required";
-  } else {
-    $Email = Test_User_Input($_POST["Email"]);
-    if (!preg_match("/[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/", $Email)) {
-      $EmailError = "Incorrect email format";
-    }
-  }
-
   if (empty($_POST["VehicleType"])) {
     $VehicleTypeError = "This field is required";
   } else {
@@ -62,30 +56,64 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  // do not use data if not correct
+  // get data from db to check if email adress is in db
+  $RegNum = "";
+  $ConnectingDB;
+  $sql = "SELECT * FROM vehicle_input";
+  $Execute = $ConnectingDB->query($sql);
+  while ($DataRows = $Execute->fetch()) {
+    $RegNum = $DataRows["regnum"];
+    echo $RegNum;
+    // advise user vehicle is registered
+    if ($RegNum == strtoupper($_POST["RegNumber"])) {
+      $_SESSION["ErrorMessage"] = strtoupper($RegNum) . " is registered on the system.";
+      Redirect_to("VehicleInput.php");
+    }
+  }
+
+
   if (
-    !empty($_POST["Email"])
-    && !empty($_POST["VehicleType"])
+    !empty($_POST["VehicleType"])
     && !empty($_POST["VehicleMake"])
     && !empty($_POST["FuelType"])
     && !empty($_POST["RegNumber"])
     && !empty($_POST["CompOwn"])
   ) {
     if (
-      preg_match("/[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/", $Email)
-      && preg_match("/^[A-za-z ]*$/", $VehicleType)
+      preg_match("/^[A-za-z ]*$/", $VehicleType)
       && preg_match("/^[A-za-z ]*$/", $VehicleMake)
       && preg_match("/^[A-za-z ]*$/", $FuelType)
       && preg_match("/^[A-za-z0-9 -]*$/", $RegNumber)
       && preg_match("/^[A-za-z ]*$/", $CompOwn)
     ) {
-      // send the data to the database and handle errors for the db side received
-      //RegNumber check if in db
-      echo " correct details received";
 
+      // add data to the db
+      $ConnectingDB;
+      $sql = "INSERT INTO vehicle_input(dateTime,email,uname,vehicletype,vehiclemake,fueltype,regnum,compown,addedby)";
+      $sql .= "VALUES(:dateTime, :emaiL, :unamE, :vehicletypE, :vehiclemakE, :fueltypE, :regnuM, :compowN, :addedbY)";
+      $stmt = $ConnectingDB->prepare($sql);
+      $stmt->bindValue(':dateTime', $DateTime);
+      $stmt->bindValue(':emaiL', $Email);
+      $stmt->bindValue(':unamE', $UserName);
+      $stmt->bindValue(':vehicletypE', $VehicleType);
+      $stmt->bindValue(':vehiclemakE', $VehicleMake);
+      $stmt->bindValue(':fueltypE', $FuelType);
+      $stmt->bindValue(':regnuM', strtoupper($RegNumber));
+      $stmt->bindValue(':compowN', $CompOwn);
+      $stmt->bindValue(':addedbY', $AddedBy);
+      $Execute = $stmt->execute();
+
+      if ($Execute) {
+        $_SESSION["SuccessMessage"] = "Vehicle with registration number : " . strtoupper($RegNumber) . " and ID " . $ConnectingDB->lastInsertId() . " was added";
+        Redirect_to("Dashboard.php");
+      } else {
+        $_SESSION["ErrorMessage"] = "Something went wrong. Please try again.";
+        Redirect_to("VehicleInput.php");
+      }
     }
   }
 }
+
 
 // seperate function at end of form sanitizing 
 function Test_User_Input($Data)

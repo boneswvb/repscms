@@ -87,14 +87,24 @@ Confirm_Login()
       </div>
       <div class="col-lg-4">
         <!-- temp place holders to be replaced with nav bar at top and info below -->
-        <p>Add additional customer contact information</p><br>
-        <p>Appointment Input</p><br>
-        <p>Comments Input</p><br>
-        <p>Company Input</p><br>
+        <a href="Login.php">
+          <p>Log In</p>
+        </a><br>
+        <a href="CompanyInput.php">
+          <p>Company Input</p>
+        </a><br>
+        <a href="RepInput.php">
+          <p>Rep Input</p>
+        </a><br>
+        <a href="VehicleInput.php">
+          <p>Vehicle Input</p>
+        </a><br>
       </div>
       <div class="col-lg-4">
         <!-- temp place holders to be replaced with nav bar at top and info below -->
-        <p>Customer Input</p><br>
+        <a href="CustomerInput.php">
+          <p>Customer Input</p>
+        </a><br>
         <p>Dashboard</p><br>
         <p>Home Page</p><br>
         <p>Log In Page</p><br>

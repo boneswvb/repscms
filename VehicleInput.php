@@ -82,18 +82,25 @@ Confirm_Login();
       <!-- rep vehicle details start -->
       <article>
         <form action="VehicleInput.php" method="post">
+          <?php
+          echo ErrorMessage();
+          echo SuccessMessage();
+          ?>
           <div class="col">
             <div class="card bg-secondary">
               <div class="card-body">
                 <small class="text-white">* = Required</small>
                 <div class="form-group">
-                  <label for="Email">Rep's Email:
-                    <span class="text-white">*</span>
-                    <span class="text-danger bg-white">
-                      <?php echo $EmailError; ?>
-                    </span>
-                  </label>
-                  <input type="text" name="Email" class="form-control">
+                  <label for="FullName">Full Name:</label>
+                  <span class="text-white">
+                    <?php echo htmlentities($_SESSION["UName"]); ?>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="FullName">Email:</label>
+                  <span class="text-white">
+                    <?php echo htmlentities($_SESSION["Email"]); ?>
+                  </span>
                 </div>
                 <div class="form-group">
                   <label for="VehicleType">Vehicle Type:

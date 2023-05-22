@@ -1,14 +1,4 @@
 <?php
-// get data from db to check if email adress is in db
-$EmailCheck = "";
-$ConnectingDB;
-$sql = "SELECT email FROM login LIMIT 1";
-$Execute = $ConnectingDB->query($sql);
-while ($DataRows = $Execute->fetch()) {
-  $EmailCheck = $DataRows["email"];
-}
-?>
-<?php
 $NameError = "";
 $EmailError = "";
 $PasswordError = "";
@@ -43,11 +33,24 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  // do not use data if not correct
-  if ($EmailCheck == $_POST["Email"]) {
-    $_SESSION["ErrorMessage"] = "The email entered is allready in use. Please check.";
-    Redirect_to("AddAUser.php");
-  } else if (
+
+  // get data from db to check if email adress is in db
+  $EmailCheck = "";
+  $ConnectingDB;
+  $sql = "SELECT * FROM login";
+  $Execute = $ConnectingDB->query($sql);
+  while ($DataRows = $Execute->fetch()) {
+    $EmailCheck = $DataRows["email"];
+
+    // advise user is loaded
+    if ($EmailCheck == $_POST["Email"]) {
+      $_SESSION["ErrorMessage"] = "The email entered is allready in use. Please check.";
+      Redirect_to("AddAUser.php");
+    }
+  }
+
+  // check if data received is correct and add to db
+  if (
     !empty($_POST["Name"])
     && !empty($_POST["Email"])
     && !empty($_POST["Password"])
