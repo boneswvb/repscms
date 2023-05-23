@@ -121,13 +121,13 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
                 </div>
               </div>
               <div class="form-group">
-                <label for="Email">Email:
+                <label for="CompEmail">Comp Email:
                   <span class="text-white">*</span>
                   <span class="text-danger bg-white">
-                    <?php echo $EmailError; ?>
+                    <?php echo $CompEmailError; ?>
                   </span>
                 </label>
-                <input class="form-control" type="email" name="Email">
+                <input class="form-control" type="email" name="CompEmail">
               </div>
               <div class="form-group">
                 <label for="CompanyName">Company Name:

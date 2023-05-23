@@ -7,7 +7,7 @@ $DateError = "";
 $NameError = "";
 $Contact1Error = "";
 $Contact2Error = "";
-$EmailError = "";
+$CompEmailError = "";
 $CompanyNameError = "";
 $CompanyAdressError = "";
 $TypeOfCompanyError = "";
@@ -21,7 +21,7 @@ $CommentError = "";
 // Name required
 // Contact1 required
 // Contact2
-// Email required
+// CompEmail required
 // CompanyName required
 // CompanyAdress required
 // TypeOfCompany required
@@ -67,12 +67,12 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  if (empty($_POST["Email"])) {
-    $EmailError = "This field is required";
+  if (empty($_POST["CompEmail"])) {
+    $CompEmailError = "This field is required";
   } else {
-    $Email = Test_User_Input($_POST["Email"]);
-    if (!preg_match("/[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/", $Email)) {
-      $EmailError = "Incorrect email format";
+    $CompEmail = Test_User_Input($_POST["CompEmail"]);
+    if (!preg_match("/[A-za-z0-9._-]{3,}@[A-za-z0-9._-]{3,}[.]{1}[A-za-z0-9._-]{2,}/", $CompEmail)) {
+      $CompEmailError = "Incorrect email format";
     }
   }
 
@@ -135,7 +135,7 @@ if (isset($_POST["Submit"])) {
   // Name required
   // Contact1 required
   // Contact2
-  // Email required
+  // CompEmail required
   // CompanyName required
   // CompanyAdress required
   // TypeOfCompany required
