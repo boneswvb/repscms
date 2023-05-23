@@ -11,29 +11,13 @@ $CompEmailError = "";
 $CompanyNameError = "";
 $CompanyAdressError = "";
 $TypeOfCompanyError = "";
-$CompanyTelephoneError = "";
 $CompanyAccountNumberError = "";
 $AppointmentError = "";
 $CommentError = "";
 
-// Field names
-// Date 
-// Name required
-// Contact1 required
-// Contact2
-// CompEmail required
-// CompanyName required
-// CompanyAdress required
-// TypeOfCompany required
-// CompanyTelephone
-// CompanyAccountNumber required
-// Appointment required
-// Comment
 
-
-// PHP for form sanitizing
+// sanitizing field info
 if (isset($_POST["Submit"])) {
-  // add checks here
   if (empty($_POST["Date"])) {
     $Date = $DateToday;
   } else {
@@ -103,13 +87,6 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  if (!empty($_POST["CompanyTelephone"])) {
-    $CompanyTelephone = Test_User_Input($_POST["CompanyTelephone"]);
-    if (!preg_match("/^[\+]{0,1}[0-9 \-]{10,15}$/", $CompanyTelephone)) {
-      $CompanyTelephoneError = "Only numbers, dashes and spaces allowed";
-    }
-  }
-
   if ($_POST["Appointment"] == "Unknown") {
     $AppointmentError = "Please select an option";
   } else {
@@ -128,8 +105,6 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  // do not use data if not correct
-
   // Field names
   // Date 
   // Name required
@@ -139,10 +114,10 @@ if (isset($_POST["Submit"])) {
   // CompanyName required
   // CompanyAdress required
   // TypeOfCompany required
-  // CompanyTelephone
   // Appointment required
   // Comment
 
+  //  check the correctness of data before sending to db
   // if (
   //   !empty($_POST["CompanyName"])
   //   && !empty($_POST["ReportingManagerName"])

@@ -162,14 +162,6 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
                 </select>
               </div>
               <div class="form-group">
-                <label for="CompanyTelephone">Company Switchboard Number:
-                  <span class="text-danger bg-white">
-                    <?php echo $CompanyTelephoneError; ?>
-                  </span>
-                </label>
-                <input class="form-control" type="text" name="CompanyTelephone">
-              </div>
-              <div class="form-group">
                 <label for="Appointment">Appointment type:
                   <span class="text-white">*</span>
                   <span class="text-danger bg-white">
