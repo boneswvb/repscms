@@ -105,7 +105,9 @@ Confirm_Login()
         <a href="CustomerInput.php">
           <p>Customer Input</p>
         </a><br>
-        <p>Dashboard</p><br>
+        <a href="CompanyTypeInput.php">
+          <p>Company Type Input</p>
+        </a><br>
         <p>Home Page</p><br>
         <p>Log In Page</p><br>
       </div>
