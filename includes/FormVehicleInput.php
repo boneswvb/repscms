@@ -56,14 +56,13 @@ if (isset($_POST["Submit"])) {
     }
   }
 
-  // get data from db to check if email adress is in db
+  // get data from db to check if reg num is in db
   $RegNum = "";
   $ConnectingDB;
   $sql = "SELECT * FROM vehicle_input";
   $Execute = $ConnectingDB->query($sql);
   while ($DataRows = $Execute->fetch()) {
     $RegNum = $DataRows["regnum"];
-    echo $RegNum;
     // advise user vehicle is registered
     if ($RegNum == strtoupper($_POST["RegNumber"])) {
       $_SESSION["ErrorMessage"] = strtoupper($RegNum) . " is registered on the system.";

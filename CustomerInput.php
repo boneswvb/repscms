@@ -79,11 +79,15 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
+        <?php
+        echo ErrorMessage();
+        echo SuccessMessage();
+        ?>
         <div class="card bg-secondary text-white mb-3">
           <div class="card-body">
             <form action="CustomerInput.php" method="post">
               <div class="form-group">
-                <label for="Date">Capture Date:
+                <label for="Date">Date Customer Was Signed Up:
                   <span class="text-white">*</span>
                   <span class="text-danger bg-white">
                     <?php echo $DateError; ?>

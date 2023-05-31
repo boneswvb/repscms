@@ -87,7 +87,7 @@ unlink($Taret_Path_to_DELETE_Image);
 // CompanyName - /^[A-za-z0-9 .\/]*$/
 // Address - /^[A-za-z0-9 \.\-\_\/\,]{1,150}$/
 // Account Number - /^[A-za-z0-9 .\/\-\_]*$/
-// Comments - /^[A-za-z0-9 .\,\-\_]*$/
+// Comments - /^[A-za-z0-9 .\,\-\_]{20,1500}$/ min 20 characters max 1500 characters
 // Password - /^(?=.*\d.*\d)(?=.*[A-Z]{1,}[a-z]{1,}[0-9]{1,}[\!\@\#\$\%\*\?]{1,}).{8,}/
 
 if(isset($_POST["Submit"])) {
@@ -159,7 +159,7 @@ while ($DataRows = $Execute->fetch()) {
   $CommentPostId = $DataRows["post_id"];
 }
 
------------------------
+-----------------------------------------
 <?php
 // get data from db to check if data exist in db
 $EmailCheck = "";
@@ -176,4 +176,14 @@ if ($EmailCheck == $Email) {
     $_SESSION["ErrorMessage"] = "You have already added your bio. You can just update it from the dashboard.";
     Redirect_to("RepInput.php");
   }
------------------------
+------------------------------------------
+
+// allocate a accountnumber to new Company
+$count = 1;
+echo "Count: " . $count . "<br>";
+$CompanyName = "Lesawi";
+echo "CompanyName: " . $CompanyName . "<br>";
+$account = strtoupper(substr($CompanyName, 0, 3)) . $count;
+echo $account . "<br>";
+
+----------------------------------
