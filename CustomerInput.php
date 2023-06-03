@@ -160,9 +160,19 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
                 </label>
                 <select class="form-control" name="TypeOfCompany">
                   <option value="Unknown">---Select an option---</option>
-                  <option value="Transport">Transport</option>
-                  <option value="Restaurant">Restaurant</option>
-                  <option value="FMCG Retail">FMCG Retail</option>
+                  <?php
+                  // get dat fron DB to display options available
+                  $ConnectingDB;
+                  $sql = "SELECT * FROM companytypeinput ORDER BY companytype asc";
+                  $Execute = $ConnectingDB->query($sql);
+
+                  while ($DataRows = $Execute->fetch()) {
+                    $CompanyType = $DataRows["companytype"];
+                    ?>
+                    <option value="<?php echo $CompanyType; ?>">
+                      <?php echo htmlentities($CompanyType); ?>
+                    </option>
+                  <?php } ?>
                 </select>
               </div>
               <div class="form-group">
@@ -188,8 +198,7 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
                     <?php echo $CommentError; ?>
                   </span>
                 </label>
-                <textarea Class="form-control mb-3" Name="Comment" rows="5" cols="25"
-                  placeholder="The following text will be added to your comment irrespective if you added a comment or not - Added by: [Your Name] on [Date] at [Time]"></textarea>
+                <textarea Class="form-control mb-3" Name="Comment" rows="5" cols="25"></textarea>
               </div>
           </div>
         </div>
@@ -206,6 +215,7 @@ $_SESSION["TrackingURL"] = $_SERVER["PHP_SELF"];
             </button>
           </div>
         </div>
+
         <!-- buttons end -->
         </form>
       </div>

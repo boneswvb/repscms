@@ -80,6 +80,10 @@ Confirm_Login();
     <div class="row">
       <div class="col-sm-12">
         <div class="card bg-secondary mb-5">
+          <?php
+          echo ErrorMessage();
+          echo SuccessMessage();
+          ?>
           <div class="card-body">
             <form action="AppointmentInput.php" method="post">
               <div class="form-group">
@@ -91,6 +95,15 @@ Confirm_Login();
                   </span>
                 </label>
                 <input class="form-control" type="date" name="AppointmentDate">
+              </div>
+              <div class="form-group">
+                <label for="CompName">Company Name:
+                  <span class="text-white">*</span>
+                  <span class="text-danger bg-white">
+                    <?php echo $CompNameError; ?>
+                  </span>
+                </label>
+                <input class="form-control" type="text" name="CompName">
               </div>
               <div class="form-group">
                 <label for="Appointment">Appointment type:
@@ -114,8 +127,8 @@ Confirm_Login();
                 </select>
               </div>
               <div class="form-group">
-                <label for="Comment">Comments:
-                  <span class="text-white">*</span>
+                <label for="Comment" class="mb-1">Comments:
+                  <sub class="text-white">These comments is only available from the appointments view.</sub>
                   <span class="text-danger bg-white">
                     <?php echo $CommentError; ?>
                   </span>
