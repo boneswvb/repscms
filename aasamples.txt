@@ -187,3 +187,9 @@ $account = strtoupper(substr($CompanyName, 0, 3)) . $count;
 echo $account . "<br>";
 
 ----------------------------------
+// sql sord data by multipule colmns
+SELECT * 
+FROM employee
+ORDER BY salary DESC, last_name ASC;
+
+//get all data from a table
